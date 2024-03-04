@@ -1,0 +1,177 @@
+/*Basics */
+* {
+    box-sizing: border-box;
+    color: #fffff0;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    font-weight: lighter;
+    scroll-behavior: smooth;
+    line-height: 1.5em;
+  }
+  
+  body {
+    background-color: #121212;
+    margin: 10em 2.4em 2.5em 2.5em;
+  }
+  #wrapper {
+    background-color: #121212;
+    margin: auto;
+  }
+  
+  header {
+    border-bottom: solid 0.05em #c1e1c1;
+    border-radius: 0;
+    position: fixed; /* keeps the header at the top */
+    padding-top: 0.5em;
+    padding-bottom: 2.5em;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #121212;
+    width: 100%;
+    height: 10em;
+  }
+  
+  h1 {
+    margin-top: 0.5em;
+  }
+  h2 {
+    text-transform: uppercase;
+    font-weight: 525;
+  }
+  
+  h3 {
+    text-transform: uppercase;
+  }
+  
+  p {
+    margin: 0.25em;
+  }
+  
+
+  h2 {
+    padding-top: 0.5em;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-align: center;
+    color: salmon;
+  }
+  
+  
+  nav li {
+    text-align: center;
+    display: inline;
+    margin: 0.4em;
+  }
+  ul {
+    margin: 0.4em;
+    padding: 0;
+    list-style: none;
+  }
+  
+
+  nav {
+    text-align: center;
+  }
+  
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: #c1e1c1;
+    font-weight: 565;
+    transition: all 0.3s ease;
+  }
+  
+  a:hover {
+    color: #fffff0;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em; 
+  }
+
+  input[type="text"] {
+    background-color: #333; 
+    color: white; 
+    border: none;
+    padding: 0.8em;
+    width: 65%; 
+    border-radius: 0.3em; 
+}
+input[type="submit"] {
+    background-color: #333; 
+    color: white; 
+    border: none;
+    padding: 0.8em 1.2em;
+    cursor: pointer;
+    border-radius: 0.3em; 
+}
+input[type="submit"]:hover {
+    background-color: #777; 
+}
+  
+
+  
+
+  
+  @media screen and (max-width: 31em) {
+    h1 {
+      font-size: 1.5em !important;
+    }
+  }
+  
+  @media screen and (min-width: 31em) and (max-width: 59em) {
+    .cards {
+      flex: 1 0 40%;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      height: 30em;
+    }
+  
+    header {
+      padding-bottom: 0.5em;
+    }
+  }
+  
+  @media screen and (min-width: 60em) and (max-width: 99em) {
+    .cards {
+      flex: 1 0 30%;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      height: 30em;
+    }
+    .flex-container {
+      width: 90%;
+      margin-left: 6.25%;
+      display: flex;
+      flex-direction: row;
+    }
+    .left,
+    .right {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+  
+  @media screen and (min-width: 100em) {
+    .cards {
+      flex: 1 0 30%;
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      height: 40em;
+    }
+  }
+  
+  
+  footer {
+    text-align: center;
+    margin-top: 3em;
+    border-top: solid 0.1em #a7c7e7;
+  }
