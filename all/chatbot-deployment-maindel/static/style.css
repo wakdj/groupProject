@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 30em;
+    max-height: 50em;
+    margin: 3em auto;
+    padding: 1.2em;
+    background-color: #fff;
+    border-radius: 0.8em;
+    box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.chat-container {
+    margin-bottom: 2em;
+    padding: 2em;
+    background-color: #fff;
+    border: 0.1em solid #6f4caf;
+    border-radius: 0.2em;
+    height: 20em;
+}
+
+
+.input-container {
+    text-align: center;
+}
+
+#textInput {
+    width: calc(100% - 4em);
+    padding: 1em;
+    margin-right: 0.8em;
+    border: 0.1em solid #ccc;
+    border-radius: 0.2em;
+}
+
+#predictButton {
+    padding: 1em;
+    cursor: pointer;
+    background-color: #6f4caf;
+    border: none;
+    color: white;
+    border-radius: 0.3em;
+}
+
+#predictButton:hover {
+    background-color: #de6cbe;
+}

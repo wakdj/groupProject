@@ -1,0 +1,109 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hey :-)",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you later", "Goodbye"],
+      "responses": [
+        "See you later, thanks for visiting",
+        "Have a nice day",
+        "Bye! Come back again soon."
+      ]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+      "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {
+      "tag": "happy",
+      "patterns": [
+        "I'm feeling happy",
+        "I'm feeling joyful",
+        "I'm in a good mood"
+      ],
+      "responses": [
+        "That's super. How about 'Dance The Night' by Dua Lipa",
+        "'Kokomo' by The Beach Boys sounds like the song for you "
+      ]
+    },
+    {
+      "tag": "sad",
+      "patterns": [
+        "I'm feeling sad",
+        "I'm feeling down",
+        "I'm feeling blue",
+        "I am very melancholy"
+      ],
+      "responses": [
+        "Oh diddums, here's 'Quiet the Winter Harbor' by Mazzy Star",
+        "If you're feeling sad, you might like '24' by Lana del Rey."
+      ]
+    },
+    {
+      "tag": "excited",
+      "patterns": [
+        "I'm feeling excited",
+        "I'm feeling thrilled",
+        "I'm pumped up"
+      ],
+      "responses": [
+        "",
+        "Woowee. Give 'Pump It Up' by Endor a go"
+      ]
+    },
+    {
+      "tag": "relaxed",
+      "patterns": [
+        "I'm feeling relaxed",
+        "I'm feeling calm",
+        "I'm chilling out"
+      ],
+      "responses": [
+        "Cool beans dude, check out 'Smooth Operator' by Sade",
+        "'Clair de Lune' by Claude Debussy is for you"
+      ]
+    },
+    {
+      "tag": "energetic",
+      "patterns": [
+        "I'm feeling energetic",
+        "I'm feeling pumped",
+        "I'm full of energy"
+      ],
+      "responses": [
+        "'Snowblind' by Black Sabbath sounds like the song for you.",
+        "'Axel F' by Crazy Frog is the only song for you"
+      ]
+    },
+
+    {
+      "tag": "funny",
+      "patterns": [
+        "Tell me a joke!",
+        "Tell me something funny!",
+        "Do you know a joke?"
+      ],
+      "responses": [
+        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+        "What did the buffalo say when his son left for college? Bison."
+      ]
+    }
+  ]
+}
