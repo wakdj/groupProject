@@ -34,6 +34,7 @@
     {
       "tag": "happy",
       "patterns": [
+        "happy",
         "I'm feeling happy",
         "I'm feeling joyful",
         "I'm in a good mood"
@@ -46,6 +47,7 @@
     {
       "tag": "sad",
       "patterns": [
+        "sad",
         "I'm feeling sad",
         "I'm feeling down",
         "I'm feeling blue",
@@ -59,18 +61,20 @@
     {
       "tag": "excited",
       "patterns": [
+        "excited",
         "I'm feeling excited",
         "I'm feeling thrilled",
         "I'm pumped up"
       ],
       "responses": [
-        "",
+        "poo",
         "Woowee. Give 'Pump It Up' by Endor a go"
       ]
     },
     {
       "tag": "relaxed",
       "patterns": [
+        "relaxed",
         "I'm feeling relaxed",
         "I'm feeling calm",
         "I'm chilling out"
@@ -83,6 +87,7 @@
     {
       "tag": "energetic",
       "patterns": [
+        "energy",
         "I'm feeling energetic",
         "I'm feeling pumped",
         "I'm full of energy"

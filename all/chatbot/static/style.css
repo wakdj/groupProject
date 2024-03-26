@@ -1,56 +1,68 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    background-color: #faf3ea;
     margin: 0;
     padding: 0;
+    color: #023020;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+h1{
+    text-align: center;
 }
 
 .container {
-    max-width: 30em;
-    max-height: 50em;
-    margin: 3em auto;
-    padding: 1.2em;
-    background-color: #fff;
-    border-radius: 0.8em;
-    box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    color: #333;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em auto;
+    padding: 0.6em;
+    background-color: #faf3ea;
+    width: auto;
 }
 
 .chat-container {
-    margin-bottom: 2em;
-    padding: 2em;
-    background-color: #fff;
-    border: 0.1em solid #6f4caf;
-    border-radius: 0.2em;
-    height: 20em;
+    background-color: #faf3ea;
+    border: 0.1em solid #023020;
+    width: 74%; 
+    box-sizing: border-box; 
+    padding: 0em 10em 0em 10em;
 }
 
+.explore-container {
+    background-color: #faf3ea;
+    width: 24%; 
+    border: 0.1em solid #023020;
+    box-sizing: border-box; 
+}
 
 .input-container {
     text-align: center;
+    align-self: center;
+    padding: 0.5em 0.5em;
+}
+
+#outputArea{
+    height: 25em;
 }
 
 #textInput {
-    width: calc(100% - 4em);
+    width: 50%;
     padding: 1em;
     margin-right: 0.8em;
-    border: 0.1em solid #ccc;
-    border-radius: 0.2em;
+    border: 0.1em solid #faf3ea;
+    border-radius: 0.6em;
 }
 
 #predictButton {
-    padding: 1em;
+    padding: 0.8em;
     cursor: pointer;
-    background-color: #6f4caf;
+    background-color: #023020;
     border: none;
-    color: white;
+    color: #faf3ea;
     border-radius: 0.3em;
 }
 
 #predictButton:hover {
-    background-color: #de6cbe;
+    background-color: #023020;
 }

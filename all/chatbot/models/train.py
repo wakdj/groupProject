@@ -14,6 +14,7 @@ import random
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
+from nltk.corpus import stopwords
 from tensorflow.keras.optimizers import SGD
 from sklearn.preprocessing import LabelEncoder
 
@@ -27,16 +28,21 @@ classes = []
 docs = []
 chars_ignore = ['?','.',',','!']
 
+stop_words = set(stopwords.words('english'))
+
 for intent in intents['intents']:
     for pattern in intent['patterns']:
         word_list = nltk.word_tokenize(pattern)
+        word_list = [word for word in word_list if word.lower() not in stop_words]
         words.extend(word_list)
         docs.append(((word_list),intent['tag']))
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
 stemmer = LancasterStemmer()
+
 words = [stemmer.stem(word) for word in words if word not in chars_ignore ]
+
 words = sorted(set(words))
 
 pickle.dump(words,open('words.pkl','wb'))

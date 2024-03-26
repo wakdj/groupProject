@@ -7,6 +7,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk import LancasterStemmer
 from tensorflow.keras.models import load_model
+from nltk.corpus import stopwords
 
 # Loading intents
 script_dir = os.path.dirname(__file__)
@@ -25,9 +26,11 @@ classes = pickle.load(open('classes.pkl', 'rb'))
 # loading model
 model_location = os.path.join(script_dir, "history.h5")
 mod = load_model(model_location)
+stop_words = set(stopwords.words('english'))
 
 def clean(sentence):
     sentence_words = nltk.word_tokenize(sentence)
+    sentence_words = [word for word in sentence_words if word.lower() not in stop_words]
     sentence_words = [stemmer.stem(word) for word in sentence_words]
     return sentence_words
 
