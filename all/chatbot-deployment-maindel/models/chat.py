@@ -8,19 +8,21 @@ from nltk.stem import WordNetLemmatizer
 from nltk import LancasterStemmer
 from tensorflow.keras.models import load_model
 
+# Loading intents
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, "intents.json")
 
 with open(file_path, 'r') as json_data:
     intents = json.load(json_data)
 
+# stemmer in order to help process
 stemmer = LancasterStemmer()
 
-# Load words and classes
+# loading words and classes
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 
-# Load trained model
+# loading model
 model_location = os.path.join(script_dir, "history.h5")
 mod = load_model(model_location)
 
