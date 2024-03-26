@@ -1,15 +1,17 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "EB Garamond", serif;
     background-color: #faf3ea;
     margin: 0;
     padding: 0;
     color: #023020;
     box-sizing: border-box;
     height: 100%;
+    font-weight: 300
 }
 
 h1{
     text-align: center;
+    
 }
 
 .container {
@@ -43,7 +45,7 @@ h1{
 }
 
 #outputArea{
-    height: 25em;
+    height: 30em;
 }
 
 #textInput {
