@@ -6,11 +6,18 @@ body {
     color: #023020;
     box-sizing: border-box;
     height: 100%;
+    font-size: larger;
 }
 
 h1{
     text-align: center;
     font-weight: lighter
+}
+
+li{
+    list-style-type: none;
+    padding-bottom: 2em;
+    /* background-color: bisque; */
 }
 
 .container {
@@ -23,11 +30,13 @@ h1{
 }
 
 .chat-container {
+    align-items: center;
     background-color: #faf3ea;
     border: 0.1em solid #023020;
     width: 74%; 
     box-sizing: border-box; 
     padding: 0em 10em 0em 10em;
+   
 }
 
 .explore-container {
@@ -43,8 +52,32 @@ h1{
     padding: 0.5em 0.5em;
 }
 
+.message-area{
+    height: 25em;
+    border-radius: 2em;
+    /* background-color: white; */
+    overflow-y: scroll;
+    scrollbar-width: none
+}
+
 #outputArea{
-    height: 30em;
+    align-self: flex-start;
+    position: relative;
+    top: 1em;
+    width: 66%;
+    padding-left: 0.5em;
+    display: inline-block;
+    /* font-family: "Rouge Script", cursive; */
+}
+
+
+
+#userMessage{
+    align-self: flex-end;
+    display: inline-block;
+    position: relative;
+    width: 25%;
+    
 }
 
 #textInput {

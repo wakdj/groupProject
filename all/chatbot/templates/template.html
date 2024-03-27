@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moody Music</title>
+    <title>Moody Music ♫</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,8 +25,16 @@
             </div>
         </div>
         <div class="chat-container">
-            <h1>Moody Music</h1>
-                <div id="outputArea"></div>
+            <h1>Moody Music ♫</h1>
+            <div class="message-area">
+                <div id="outputArea">
+                    <ul></ul>
+                </div>
+                <div id = "userMessage">
+                    <ul></ul>
+                </div>
+            </div>
+                
             <div class="input-container">
                 <input type="text" id="textInput" placeholder="How can I help?">
                 <button id="predictButton">Enter</button>
