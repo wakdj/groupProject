@@ -6,12 +6,11 @@ body {
     color: #023020;
     box-sizing: border-box;
     height: 100%;
-    font-weight: 300
 }
 
 h1{
     text-align: center;
-    
+    font-weight: lighter
 }
 
 .container {

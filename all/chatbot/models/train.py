@@ -3,25 +3,21 @@ import random
 import json
 import pickle
 import os
-import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
-from sklearn.model_selection import train_test_split
 import nltk
-from nltk.stem import WordNetLemmatizer
 from nltk import LancasterStemmer
 import random
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from nltk.corpus import stopwords
-from tensorflow.keras.optimizers import SGD
-from sklearn.preprocessing import LabelEncoder
 
 script_dir = os.path.dirname(__file__)  
 file_path = os.path.join(script_dir, "intents.json")
 with open(file_path, 'r') as f:
     intents = json.load(f)
+
 
 words = []
 classes = []
@@ -77,7 +73,7 @@ model.add(Dropout(0.5))
 model.add(Dense(len(y_train[0]), activation = 'softmax'))
 model.compile(loss = 'categorical_crossentropy',optimizer = 'nadam', metrics= ['accuracy'])
 
-history = model.fit(np.array(x_train),np.array(y_train),epochs = 500,batch_size = 12, verbose = 1 )
+history = model.fit(np.array(x_train),np.array(y_train),epochs = 300,batch_size = 12, verbose = 1 )
 
-model.save('history.h5',history)
+model.save('history.keras',history)
 

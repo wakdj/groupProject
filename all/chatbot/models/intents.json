@@ -88,6 +88,7 @@
       "tag": "energetic",
       "patterns": [
         "energy",
+        "energetic",
         "I'm feeling energetic",
         "I'm feeling pumped",
         "I'm full of energy"
