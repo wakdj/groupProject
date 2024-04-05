@@ -57,7 +57,7 @@ function adjustHeightDifference(userMessage,outputArea) {
         
         const lastBotListItem = outputArea.lastChild;
 
-        const lastUserListItemHeight = lastUserListItem.clientHeight;
+        const lastUserListItemHeight = lastUserListItem.clientHeight;   
         const lastBotListItemHeight = lastBotListItem.clientHeight;
         // const lastBotListItemStyles = window.getComputedStyle(lastBotListItem);
         // const lastBotListItemStylesPaddingBottom = parseFloat(lastBotListItemStyles.paddingBottom);

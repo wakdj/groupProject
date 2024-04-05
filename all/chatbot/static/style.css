@@ -69,7 +69,6 @@ li{
 
 #outputArea{  
     /* align-self: flex-start; */
-     margin-top: 5em !important;
      height: 95%;
     width: 49%;
     padding-left: 0.5em;
@@ -109,6 +108,9 @@ li{
     background-color: #023020;
 }
 
+.space{
+    padding-bottom:0.5em ;
+}
 
 @media only screen and (max-width: 600px) {
     body{
