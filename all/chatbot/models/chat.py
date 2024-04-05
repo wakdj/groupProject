@@ -4,14 +4,15 @@ import os
 import pickle
 import numpy as np
 import nltk
-from nltk.stem import WordNetLemmatizer
-from nltk import LancasterStemmer
-from tensorflow.keras.models import load_model
+from nltk.stem import LancasterStemmer
+from tensorflow.lite.python.interpreter import Interpreter
 from nltk.corpus import stopwords
 
 # Loading intents
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, "intents.json")
+file_path_words = os.path.join(script_dir, "words.pkl")
+file_path_classes = os.path.join(script_dir, "classes.pkl")
 
 with open(file_path, 'r') as json_data:
     intents = json.load(json_data)
@@ -20,12 +21,14 @@ with open(file_path, 'r') as json_data:
 stemmer = LancasterStemmer()
 
 # loading words and classes
-words = pickle.load(open('words.pkl', 'rb'))
-classes = pickle.load(open('classes.pkl', 'rb'))
+words = pickle.load(open(file_path_words, 'rb'))
+classes = pickle.load(open(file_path_classes, 'rb'))
 
 # loading model
-model_location = os.path.join(script_dir, "history.keras")
-mod = load_model(model_location)
+model_location = os.path.join(script_dir, "model.tflite")
+interpreter = Interpreter(model_location)
+interpreter.allocate_tensors()
+
 stop_words = set(stopwords.words('english'))
 
 def get_intents():
@@ -48,14 +51,17 @@ def bag_of_words(sentence):
 
 def predict_class(sentence):
     bow = bag_of_words(sentence)
-    res = mod.predict(np.array([bow]))[0]
-    results = [[i, r] for i, r in enumerate(res) if r > 0.6]
+    input = interpreter.get_input_details()
+    output = interpreter.get_output_details()
+    bow = bow.astype(np.float32)
+    interpreter.set_tensor(input[0]['index'], [bow])
+    interpreter.invoke()
+    result = interpreter.get_tensor(output[0]['index'])[0]
+    results = [[i, r] for i, r in enumerate(result) if r > 0.5]
     print(results)
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = [{'intent': classes[r[0]], 'probability': str(r[1])} for r in results]
     return return_list
-
-
 
 def get_response(intents_list, intents_json):
     if len(intents_list) == 0:
@@ -68,5 +74,5 @@ def get_response(intents_list, intents_json):
             break
     return result
 
-x = predict_class("poo")
+x = predict_class("hi")
 print(x)

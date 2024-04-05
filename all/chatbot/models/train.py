@@ -12,9 +12,12 @@ import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from nltk.corpus import stopwords
+import tensorflow as tf
 
-script_dir = os.path.dirname(__file__)  
+script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, "intents.json")
+file_path_words = os.path.join(script_dir,"words.pkl")
+file_path_classes = os.path.join(script_dir,"classes.pkl")
 with open(file_path, 'r') as f:
     intents = json.load(f)
 
@@ -41,8 +44,8 @@ words = [stemmer.stem(word) for word in words if word not in chars_ignore ]
 
 words = sorted(set(words))
 
-pickle.dump(words,open('words.pkl','wb'))
-pickle.dump(classes,open('classes.pkl','wb'))
+pickle.dump(words,open(file_path_words,'wb'))
+pickle.dump(classes,open(file_path_classes,'wb'))
 
 training = []
 output_temp = [0] * len(classes)
@@ -75,5 +78,8 @@ model.compile(loss = 'categorical_crossentropy',optimizer = 'nadam', metrics= ['
 
 history = model.fit(np.array(x_train),np.array(y_train),epochs = 300,batch_size = 12, verbose = 1 )
 
-model.save('history.keras',history)
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
 
+with open('model.tflite', 'wb') as f:
+  f.write(tflite_model)
