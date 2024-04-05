@@ -7,6 +7,8 @@ body {
     box-sizing: border-box;
     height: 100%;
     font-size: larger;
+    height: 100vh;
+    max-width: 100%;
 }
 
 h1{
@@ -22,18 +24,19 @@ li{
 
 .container {
     display: flex;
-    justify-content: space-between;
+    justify-content: wrap;
     margin: 0.5em auto;
-    padding: 0.6em;
+    /* padding: 0.6em;
     background-color: #faf3ea;
-    width: auto;
+    */
+     width: auto;
 }
 
 .chat-container {
     align-items: center;
     background-color: #faf3ea;
     border: 0.1em solid #023020;
-    width: 74%; 
+    width: 100%; 
     box-sizing: border-box; 
     padding: 0em 10em 0em 10em;
    
@@ -41,9 +44,10 @@ li{
 
 .explore-container {
     background-color: #faf3ea;
-    width: 24%; 
+    max-width: 24%; 
     border: 0.1em solid #023020;
     box-sizing: border-box; 
+    min-height: fit-content;
 }
 
 .input-container {
@@ -54,8 +58,11 @@ li{
 
 .message-area{
     height: 25em;
+    align-items: center;
     border-radius: 2em;
-    /* background-color: white; */
+    width: 50em;
+    width: 100%;
+    background-color: white;
     overflow-y: scroll;
     scrollbar-width: none
 }
@@ -64,24 +71,24 @@ li{
     align-self: flex-start;
     position: relative;
     top: 1em;
-    width: 66%;
+    width: 49%;
     padding-left: 0.5em;
     display: inline-block;
     /* font-family: "Rouge Script", cursive; */
 }
 
 
-
 #userMessage{
     align-self: flex-end;
     display: inline-block;
     position: relative;
-    width: 25%;
+    text-align: center;
+    width: 49%;
     
 }
 
 #textInput {
-    width: 50%;
+    width: 25em;
     padding: 1em;
     margin-right: 0.8em;
     border: 0.1em solid #faf3ea;
@@ -100,3 +107,37 @@ li{
 #predictButton:hover {
     background-color: #023020;
 }
+
+
+@media only screen and (max-width: 600px) {
+    body{
+        font-size: small;
+    }
+    .message-area{
+        width: 25em;
+        padding: -0.5em;
+        height: 30em;
+    }
+    .chat-container{
+        padding: 0.5em;
+    }
+    .input-container{
+        
+    }
+    #textInput{
+        max-width: 12em;
+        padding: 0.5em
+    }
+    #predictButton{
+        padding: 0.5em;
+    }
+    #outputArea{
+        padding-top: 1em;
+        padding: 0.225em;
+        width: 40%;
+    }
+
+    #userMessage{
+        padding-top: -1em ;
+    }
+  }
