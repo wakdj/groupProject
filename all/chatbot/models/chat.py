@@ -57,7 +57,7 @@ def predict_class(sentence):
     interpreter.set_tensor(input[0]['index'], [bow])
     interpreter.invoke()
     result = interpreter.get_tensor(output[0]['index'])[0]
-    results = [[i, r] for i, r in enumerate(result) if r > 0.5]
+    results = [[i, r] for i, r in enumerate(result) if r > 0.403]
     print(results)
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = [{'intent': classes[r[0]], 'probability': str(r[1])} for r in results]
@@ -74,5 +74,11 @@ def get_response(intents_list, intents_json):
             break
     return result
 
-x = predict_class("hi")
+x = predict_class("i am happy")
 print(x)
+print("*******************")
+y = predict_class("i need energy")
+print(y)
+print("*****************")
+poo = predict_class("poo")
+print(poo)
