@@ -19,8 +19,9 @@ h1{
 li{
     list-style-type: none;
     padding-bottom: 2em;
-    /* background-color: bisque; */
 }
+
+
 
 .container {
     display: flex;
@@ -62,27 +63,27 @@ li{
     border-radius: 2em;
     width: 50em;
     width: 100%;
-    background-color: white;
     overflow-y: scroll;
     scrollbar-width: none
 }
 
-#outputArea{
-    align-self: flex-start;
-    position: relative;
-    top: 1em;
+#outputArea{  
+    /* align-self: flex-start; */
+     margin-top: 5em !important;
+     height: 95%;
     width: 49%;
     padding-left: 0.5em;
-    display: inline-block;
+    display: inline-table;
     /* font-family: "Rouge Script", cursive; */
 }
 
 
+
+
 #userMessage{
-    align-self: flex-end;
-    display: inline-block;
-    position: relative;
-    text-align: center;
+    /* align-self: flex-end; */
+    display: inline-table;
+    text-align: left;
     width: 49%;
     
 }
@@ -132,12 +133,14 @@ li{
         padding: 0.5em;
     }
     #outputArea{
-        padding-top: 1em;
         padding: 0.225em;
-        width: 40%;
-    }
+        width: 55%;
+        margin-top: 1em ;    }
 
     #userMessage{
-        padding-top: -1em ;
+        max-width: 35%;
+        
     }
+
+
   }
