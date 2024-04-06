@@ -18,12 +18,17 @@ h1{
 
 li{
     list-style-type: none;
-    
-    background-color: cornflowerblue;
-    border-radius: 2em;
-    text-align: center !important;
-    margin: 2em
+    margin: 1em;
+    /* background-color: #efddc7;
+    border-radius: 2em; */
+    text-align: left !important;
 }
+li div{
+    background-color: #fdecd7;
+    border-radius: 1em;
+    padding: 0 0.5em 0 0.2em;
+}
+
 
 
 
@@ -73,6 +78,7 @@ li{
 
 #outputArea{  
     /* align-self: flex-start; */
+    margin-top: 1em;
      height: 95%;
     width: 49%;
     padding-left: 0.5em;
@@ -113,7 +119,9 @@ li{
 }
 
 .space{
-    padding-bottom:0.5em ;
+    padding-bottom:0em ;
+    margin: 0;
+    background-color:#faf3ea ;
 }
 
 @media only screen and (max-width: 600px) {
@@ -139,7 +147,7 @@ li{
         padding: 0.5em;
     }
     #outputArea{
-        margin-top: 5em;
+        margin-top: 3em;
         padding: 0.225em;
         width: 55%;
         margin-top: 1em ;    }
