@@ -18,7 +18,11 @@ h1{
 
 li{
     list-style-type: none;
-    padding-bottom: 2em;
+    
+    background-color: cornflowerblue;
+    border-radius: 2em;
+    text-align: center !important;
+    margin: 2em
 }
 
 
@@ -135,6 +139,7 @@ li{
         padding: 0.5em;
     }
     #outputArea{
+        margin-top: 5em;
         padding: 0.225em;
         width: 55%;
         margin-top: 1em ;    }
