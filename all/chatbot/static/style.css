@@ -19,17 +19,35 @@ h1{
 li{
     list-style-type: none;
     margin: 1em;
-    /* background-color: #efddc7;
-    border-radius: 2em; */
     text-align: left !important;
 }
+
 li div{
-    background-color: #fdecd7;
     border-radius: 1em;
     padding: 0 0.5em 0 0.2em;
+    width: 55%;
 }
+  .choices-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .choice {
+    width: 50%;
+    display: inline-block;
+    padding: 0.1em;
+    background-color: #e6d7ff;
+    border-radius: 0.5em;
+    text-align: center;
+  }
 
+  .choice:hover{
+    background-color: skyblue;
+  }
 
+span{
+    margin: 0.5em;
+}
 
 
 .container {
@@ -156,6 +174,17 @@ li div{
         max-width: 35%;
         
     }
+    /* .choices{
+        display: block;
+         margin: 0 auto;
+        align-self: center;
+        align-items: center;
+        padding: 0.2em;
+        margin: 0.2em;
+        background-color: brown;
+        border-radius: 0.5em;
+        text-align: center;
+    } */
 
 
   }

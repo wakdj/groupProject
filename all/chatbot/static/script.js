@@ -19,29 +19,57 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 console.log("hi")
                 if (!response.ok) {
-                    console.log("error")
+                    console.Error("error")
                     throw new Error('Fail');
                 }
                 return response.json();
             })
             .then(data => {
+                const botText = data.answer.split(":")[0];
+                const intent = data.answer.split(":")[1]
                 const spaceForBot = document.createElement("br")
                 const spaceForUser = document.createElement("br")
-               // spaceLi.classList.add("space");
+                const spaceForChoices = document.createElement("br")
+                const choice1 = document.createElement("span")
+                const choice2 = document.createElement("span")
+                const choice3 = document.createElement("span")
+
                 const newLiForBot = document.createElement("li");
                 const newLiForUser = document.createElement("li");
                 const newSpanForBot = document.createElement("span");
                 const newSpanForUser = document.createElement("span")
+                const newDivForChoices = document.createElement("div");
                 const newDivForBot = document.createElement("div");
-                const newDivForUser = document.createElement("div")
-                const responseText = document.createTextNode(data.answer);
+                const newDivForUser = document.createElement("div");
                 
-                const userText = document.createTextNode(message);
+                const responseText = document.createTextNode(botText);
+                const intentText = document.createTextNode(intent);
+                const op2 = document.createTextNode("option 2")
+                const op3 = document.createTextNode("option 3")
+                
+                
                 newSpanForBot.appendChild(responseText)
-                newDivForBot.appendChild(newSpanForBot)
+
+                choice1.classList.add("choice")
+                choice2.classList.add("choice")
+                choice3.classList.add("choice")
+                spaceForChoices.classList.add("choices-container")
+                choice1.appendChild(intentText)
+                choice2.appendChild(op2)
+                choice3.appendChild(op3)
+                
+
+                newDivForBot.appendChild(newSpanForBot);
+                newDivForBot.appendChild(spaceForChoices);
+                newDivForChoices.appendChild(choice1);
+                newDivForChoices.appendChild(choice2);
+                newDivForChoices.appendChild(choice3);
+                newDivForBot.appendChild(newDivForChoices)
+
                 newLiForBot.appendChild(newDivForBot);
                 newLiForBot.appendChild(spaceForBot);
-                
+
+                const userText = document.createTextNode(message);
                 newSpanForUser.appendChild(userText)
                 newDivForUser.appendChild(newSpanForUser)
                 newLiForUser.appendChild(newDivForUser);
@@ -49,11 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 userMessage.appendChild(newLiForUser);
                 outputArea.appendChild(newLiForBot);
-                //outputArea.appendChild(spaceLi)
                 
                 adjustHeightDifference(userMessage,outputArea);
-                // console.log(outputArea.getClientRects()[0].height)
-                // console.log(userMessage.getClientRects()[0].height)
             })
             .catch(error => {
                 console.error('Error:', error);

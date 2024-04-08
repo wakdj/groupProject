@@ -28,7 +28,7 @@ classes = pickle.load(open(file_path_classes, 'rb'))
 model_location = os.path.join(script_dir, "model.tflite")
 interpreter = Interpreter(model_location)
 interpreter.allocate_tensors()
-
+emotion = ""
 stop_words = set(stopwords.words('english'))
 
 def get_intents():
@@ -72,7 +72,11 @@ def get_response(intents_list, intents_json):
         if i['tag'] == tag:
             result = random.choice(i['responses'])
             break
-    return result
+    return result + " :" + tag 
+
+
+
+
 
 x = predict_class("i am happy")
 print(x)
