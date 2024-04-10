@@ -78,10 +78,10 @@
                     newDivForUser.appendChild(newSpanForUser)
                     newLiForUser.appendChild(newDivForUser);
                     newLiForUser.appendChild(spaceForUser);
-
+                  //  displayOptions(intent,newDivForBot);
                     userMessage.appendChild(newLiForUser);
                     outputArea.appendChild(newLiForBot);
-                    displayOptions(intent,newDivForBot);
+                    displayOptions(userMessage, intent,newDivForBot,outputArea);
                     adjustHeightDifference(userMessage,outputArea);
                 })
                 .catch(error => {
@@ -109,14 +109,14 @@
 
             console.log(lastBotListItemHeight)  
             lastUserListItem.style.height = (lastBotListItemHeight) + "px"
-            
             lastUserListItem.style.padding = 0
         }
 
     }
 
-    function displayOptions(category, area) {
+    function displayOptions(um,category, area,ou) {
         const newDivForChoices = document.createElement("div");
+        const newDivForAnswers = document.createElement('div');
         const optionsArr = [];
         const recommendation = document.createElement("span");
         console.log(category);
@@ -127,6 +127,10 @@
             optionsArr[0] = "pop";
             optionsArr[1] = "blues";
             optionsArr[2] = "slowcore";
+        } else if(category === "happy"){
+            optionsArr[0] = "pop";
+            optionsArr[1] = "feel good";
+            optionsArr[2] = "rock";
         }
         const choice1 = document.createElement("button");
         const choice2 = document.createElement("button");
@@ -166,9 +170,21 @@
                             return response.json();
                         })
                         .then(data => {
-                            const recommendationText = document.createTextNode(data.answer)
+                            const linkTag = document.createElement("a") 
+                            const recommendationText = document.createTextNode(data.answer[0])
+                            const link = document.createTextNode(data.answer[1]);
+                            linkTag.appendChild(link);
+                            linkTag.href = data.answer[1]
+                            linkTag.target = "_blank"
+                            console.log(data.answer)
                             recommendation.appendChild(recommendationText)
-                            area.appendChild(recommendation)
+                            recommendation.appendChild(linkTag)
+                            newDivForAnswers.appendChild(recommendation)
+                            choice1.disabled = true
+                            choice2.disabled = true
+                            choice3.disabled = true
+                            area.appendChild(newDivForAnswers)
+                            adjustHeightDifference(um,ou) 
                         });
                 }
             });

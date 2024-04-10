@@ -46,6 +46,9 @@ li div{
   .choice:hover{
     background-color: skyblue;
   }
+  button:hover:not([enabled="enabled"]) {
+   background-color: #e6d7ff;
+  }
 
 span{
     margin: 0.5em;
@@ -137,6 +140,7 @@ span{
 #predictButton:hover {
     background-color: #023020;
 }
+
 
 .space{
     padding-bottom:0em ;

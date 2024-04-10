@@ -87,7 +87,7 @@ def get_song(m,s):
         if(x["category"] == m):
             songs = (x["sub_category"][s])
     r = random.randint(0,len(songs)-1)
-    return songs[r]["name"] + " by " + songs[r]["artist"] + ". Here's the link " + songs[r]["spotify_url"]
+    return [songs[r]["name"] + " by " + songs[r]["artist"] + ". Here's the link ",songs[r]["spotify_url"]]
 
 
 (get_song("sad","sad_pop"))

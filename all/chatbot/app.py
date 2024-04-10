@@ -20,6 +20,7 @@ def predict():
 def postSong():
     category_sub_category = request.get_json().get("message")
     main_category = category_sub_category.split("_")[0]
+    category_sub_category = category_sub_category.replace(" ","_")
     res = get_song(main_category, category_sub_category)
     message = {"answer": res}
     return jsonify(message)
