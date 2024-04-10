@@ -35,7 +35,9 @@ li div{
   .choice {
     width: 50%;
     display: inline-block;
-    padding: 0.1em;
+    padding: 0.75em;
+    margin: 0.5em;
+    border: none;
     background-color: #e6d7ff;
     border-radius: 0.5em;
     text-align: center;

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from models.chat import get_response,predict_class,get_intents
+from models.chat import get_response,predict_class,get_intents,get_song
 
 app = Flask(__name__)
 
@@ -13,6 +13,14 @@ def predict():
     ints = predict_class(text)
     res = get_response(ints, get_intents())
     #response = get_response(text)
+    message = {"answer": res}
+    return jsonify(message)
+
+@app.post("/postSong")
+def postSong():
+    category_sub_category = request.get_json().get("message")
+    main_category = category_sub_category.split("_")[0]
+    res = get_song(main_category, category_sub_category)
     message = {"answer": res}
     return jsonify(message)
 

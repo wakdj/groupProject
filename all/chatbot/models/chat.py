@@ -2,6 +2,7 @@ import random
 import json
 import os
 import pickle
+import random
 import numpy as np
 import nltk
 from nltk.stem import LancasterStemmer
@@ -11,11 +12,16 @@ from nltk.corpus import stopwords
 # Loading intents
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, "intents.json")
+file_path_song_data = os.path.join(script_dir, "all_playlist_info.json")
 file_path_words = os.path.join(script_dir, "words.pkl")
 file_path_classes = os.path.join(script_dir, "classes.pkl")
 
+
 with open(file_path, 'r') as json_data:
     intents = json.load(json_data)
+
+with open(file_path_song_data, 'r') as json_data:
+    song_data = json.load(json_data)
 
 # stemmer in order to help process
 stemmer = LancasterStemmer()
@@ -23,6 +29,7 @@ stemmer = LancasterStemmer()
 # loading words and classes
 words = pickle.load(open(file_path_words, 'rb'))
 classes = pickle.load(open(file_path_classes, 'rb'))
+
 
 # loading model
 model_location = os.path.join(script_dir, "model.tflite")
@@ -72,7 +79,19 @@ def get_response(intents_list, intents_json):
         if i['tag'] == tag:
             result = random.choice(i['responses'])
             break
-    return result + " :" + tag 
+    return result + "~" + tag 
+
+def get_song(m,s):
+    songs = None
+    for x in song_data:
+        if(x["category"] == m):
+            songs = (x["sub_category"][s])
+    r = random.randint(0,len(songs)-1)
+    return songs[r]["name"] + " by " + songs[r]["artist"] + ". Here's the link " + songs[r]["spotify_url"]
+
+
+(get_song("sad","sad_pop"))
+
 
 
 
