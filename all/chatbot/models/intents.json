@@ -22,8 +22,7 @@
       "patterns": ["Bye", "See you later", "Goodbye"],
       "responses": [
         "See you later, thanks for visiting",
-        "Have a nice day",
-        "Bye! Come back again soon."
+        "Have a nice day"
       ]
     },
     {
@@ -35,52 +34,57 @@
       "tag": "happy",
       "patterns": [
         "happy",
+        "nice",
+        "wonderful",
+        "delight",
         "I'm feeling happy",
         "I'm feeling joyful",
-        "I'm in a good mood"
+        "I'm in a good mood",
+        "I had a really nice day"
+
       ],
       "responses": [
-        "That's super. How about 'Dance The Night' by Dua Lipa",
-        "'Kokomo' by The Beach Boys sounds like the song for you "
+        "That's super. Pick an option from below and I'll find you a song",
+        "I've got a few songs in mind. Please pick one of the options, and I'll do all the work."
       ]
     },
     {
       "tag": "sad",
       "patterns": [
         "sad",
+        "unhappy",
+        "shit",
+        "heartbroken",
         "I'm feeling sad",
         "I'm feeling down",
         "I'm feeling blue",
-        "I am very melancholy"
+        "I am very melancholy",
+        "I am feeling sad",
+        "I am feeling down",
+        "I am feeling blue"
       ],
       "responses": [
-        "Oh diddums, here's 'Quiet the Winter Harbor' by Mazzy Star",
-        "If you're feeling sad, you might like '24' by Lana del Rey."
-      ]
-    },
-    {
-      "tag": "excited",
-      "patterns": [
-        "excited",
-        "I'm feeling excited",
-        "I'm feeling thrilled",
-        "I'm pumped up"
-      ],
-      "responses": [
-        "poo",
-        "Woowee. Give 'Pump It Up' by Endor a go"
+        "Oh diddums, here's a few options for you to pick from.",
+        "If you're feeling sad, please pick one of the options below and I'll recommend a song for you."
       ]
     },
     {
       "tag": "relaxed",
       "patterns": [
         "relaxed",
+        "breezy",
+        "calm",
+        "chill",
+        "mellow",
         "I'm feeling relaxed",
         "I'm feeling calm",
-        "I'm chilling out"
+        "I am chilling out",
+        "I am feeling relaxed",
+        "I am feeling calm",
+        "I am chilling out"
       ],
       "responses": [
-        "Cool beans dude, check out 'Smooth Operator' by Sade",
+        "Nice! I've got a few chill options below for you.",
         "'Clair de Lune' by Claude Debussy is for you"
       ]
     },
@@ -89,13 +93,21 @@
       "patterns": [
         "energy",
         "energetic",
+        "gassed",
         "I'm feeling energetic",
         "I'm feeling pumped",
-        "I'm full of energy"
+        "I'm full of energy",
+        "excited",
+        "I'm feeling excited",
+        "I'm feeling thrilled",
+        "I'm pumped up",
+        "I am feeling excited",
+        "I am feeling thrilled",
+        "I am pumped up"
       ],
       "responses": [
-        "'Snowblind' by Black Sabbath sounds like the song for you.",
-        "'Axel F' by Crazy Frog is the only song for you"
+        "I've got a few options that you'll like",
+        "PICK ONE OF THE OPTIONS BELOW!"
       ]
     },
 

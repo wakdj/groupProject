@@ -70,13 +70,13 @@ input_shape = len(x_train[0])
 
 model = Sequential()
 model.add(Dense(16, input_shape = (input_shape,), activation ='relu' ))
-model.add(Dropout(0.5))
+model.add(Dropout(0.3))
 model.add(Dense(32, activation = 'relu'))
-model.add(Dropout(0.5))
+model.add(Dropout(0.3))
 model.add(Dense(len(y_train[0]), activation = 'softmax'))
 model.compile(loss = 'categorical_crossentropy',optimizer = 'nadam', metrics= ['accuracy'])
 
-history = model.fit(np.array(x_train),np.array(y_train),epochs = 300,batch_size = 12, verbose = 1 )
+history = model.fit(np.array(x_train),np.array(y_train),epochs = 250,batch_size = 12, verbose = 1 )
 
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()

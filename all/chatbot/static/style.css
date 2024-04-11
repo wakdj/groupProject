@@ -25,7 +25,7 @@ li{
 li div{
     border-radius: 1em;
     padding: 0 0.5em 0 0.2em;
-    width: 55%;
+    width: 65%;
 }
   .choices-container {
     display: flex;
@@ -50,10 +50,15 @@ li div{
    background-color: #e6d7ff;
   }
 
-span{
-    margin: 0.5em;
-}
 
+
+a{
+    color: #056846;
+    text-decoration: none;
+}
+/* a:hover{
+    color: #056846;
+} */
 
 .container {
     display: flex;

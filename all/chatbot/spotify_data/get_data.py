@@ -15,6 +15,12 @@ sad_blues_uri = "spotify:playlist:3HBMO2cSZUqj0yQzPCV2sG"
 happy_pop_uri = "spotify:playlist:37i9dQZF1DWVlYsZJXqdym"
 happy_jazz_uri = "spotify:playlist:37i9dQZF1DX5YTAi6JhwZm"
 happy_rock_uri = 'spotify:playlist:5shpZNIDc85cR2bj7UUAXA'
+relaxed_pop_uri = "spotify:playlist:37i9dQZF1DX1IeqVkK7Ebc"
+relaxed_classical_uri = "spotify:playlist:37i9dQZF1DWUvHZA1zLcjW"
+relaxed_psychedelic_uri = "spotify:playlist:4BmbI2WjqlLRgQrL50BDvV"
+energetic_rock_uri = "spotify:playlist:2p7jd1Dlh3BQZVXF7TVxx8"
+energetic_guaracha_uri = "spotify:playlist:37i9dQZF1DWVlpazNNfpRz"
+energetic_drum_and_bass_uri = "spotify:playlist:37i9dQZF1DWVlpazNNfpRz"
 
 categories_sub_categories = [
     {
@@ -23,7 +29,15 @@ categories_sub_categories = [
     },
     {
         "category": "happy",
-        "sub_category": {"happy_pop":happy_pop_uri, "happy_feel_good":happy_jazz_uri, "happy_rock":happy_rock_uri}
+        "sub_category": {"happy_pop":happy_pop_uri, "happy_jazz":happy_jazz_uri, "happy_rock":happy_rock_uri}
+    },
+    {
+        "category": "relaxed",
+        "sub_category": {"relaxed_pop":relaxed_pop_uri, "relaxed_classical":relaxed_classical_uri, "relaxed_psychedelic":relaxed_psychedelic_uri}
+    },
+    {
+        "category": "energetic",
+        "sub_category": {"energetic_rock":energetic_rock_uri, "energetic_guaracha":energetic_guaracha_uri, "energetic_drum_and_bass":energetic_drum_and_bass_uri}
     }
 ]
 spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials(client_id=client_pass, client_secret=client_pass_secret))

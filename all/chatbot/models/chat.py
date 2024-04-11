@@ -64,7 +64,7 @@ def predict_class(sentence):
     interpreter.set_tensor(input[0]['index'], [bow])
     interpreter.invoke()
     result = interpreter.get_tensor(output[0]['index'])[0]
-    results = [[i, r] for i, r in enumerate(result) if r > 0.403]
+    results = [[i, r] for i, r in enumerate(result) if r > 0.5]
     print(results)
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = [{'intent': classes[r[0]], 'probability': str(r[1])} for r in results]
@@ -82,15 +82,16 @@ def get_response(intents_list, intents_json):
     return result + "~" + tag 
 
 def get_song(m,s):
+    # start_sentence_options = ["You might like ", ""]
     songs = None
     for x in song_data:
         if(x["category"] == m):
             songs = (x["sub_category"][s])
     r = random.randint(0,len(songs)-1)
-    return [songs[r]["name"] + " by " + songs[r]["artist"] + ". Here's the link ",songs[r]["spotify_url"]]
+    return ["You might like " + songs[r]["name"] + " by " + songs[r]["artist"] + ". Here's a Spotify ", songs[r]["spotify_url"]]
 
 
-(get_song("sad","sad_pop"))
+#(get_song("sad","sad_pop"))
 
 
 
@@ -100,7 +101,7 @@ def get_song(m,s):
 x = predict_class("i am happy")
 print(x)
 print("*******************")
-y = predict_class("i need energy")
+y = predict_class("i need an energetic song")
 print(y)
 print("*****************")
 poo = predict_class("poo")

@@ -120,7 +120,7 @@
         const optionsArr = [];
         const recommendation = document.createElement("span");
         console.log(category);
-        if (category === "greeting") {
+        if (category === "greeting" || category === "thanks" || category === "goodbye" || category === "funny" || category === "") {
             return;
         }
         if (category === "sad") {
@@ -129,8 +129,16 @@
             optionsArr[2] = "slowcore";
         } else if(category === "happy"){
             optionsArr[0] = "pop";
-            optionsArr[1] = "feel good";
+            optionsArr[1] = "jazz";
             optionsArr[2] = "rock";
+        } else if(category === "relaxed"){
+            optionsArr[0] = "pop";
+            optionsArr[1] = "classical";
+            optionsArr[2] = "psychedelic";
+        } else if(category === "energetic"){
+            optionsArr[0] = "rock";
+            optionsArr[1] = "guaracha";
+            optionsArr[2] = "drum and bass";
         }
         const choice1 = document.createElement("button");
         const choice2 = document.createElement("button");
@@ -172,7 +180,7 @@
                         .then(data => {
                             const linkTag = document.createElement("a") 
                             const recommendationText = document.createTextNode(data.answer[0])
-                            const link = document.createTextNode(data.answer[1]);
+                            const link = document.createTextNode("link");
                             linkTag.appendChild(link);
                             linkTag.href = data.answer[1]
                             linkTag.target = "_blank"
