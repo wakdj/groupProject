@@ -65,7 +65,7 @@
       ],
       "responses": [
         "Oh diddums, here's a few options for you to pick from.",
-        "If you're feeling sad, please pick one of the options below and I'll recommend a song for you."
+        "If you're not feeling so great, please pick one of the options below and I'll recommend a song for you."
       ]
     },
     {
@@ -84,8 +84,7 @@
         "I am chilling out"
       ],
       "responses": [
-        "Nice! I've got a few chill options below for you.",
-        "'Clair de Lune' by Claude Debussy is for you"
+        "Nice! I've got a few chill options below for you."
       ]
     },
     {

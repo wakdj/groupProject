@@ -72,7 +72,7 @@ def predict_class(sentence):
 
 def get_response(intents_list, intents_json):
     if len(intents_list) == 0:
-        return "Sorry, I cannot understand you yet."
+        return "Sorry, I cannot understand you yet. ~" + "unknown"
     tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
     for i in list_of_intents:

@@ -120,7 +120,7 @@
         const optionsArr = [];
         const recommendation = document.createElement("span");
         console.log(category);
-        if (category === "greeting" || category === "thanks" || category === "goodbye" || category === "funny" || category === "") {
+        if (category === "greeting" || category === "thanks" || category === "goodbye" || category === "funny" || category === "unknown") {
             return;
         }
         if (category === "sad") {
@@ -179,6 +179,7 @@
                         })
                         .then(data => {
                             const linkTag = document.createElement("a") 
+                            elem.style.color = "pink"
                             const recommendationText = document.createTextNode(data.answer[0])
                             const link = document.createTextNode("link");
                             linkTag.appendChild(link);

@@ -25,8 +25,9 @@ li{
 li div{
     border-radius: 1em;
     padding: 0 0.5em 0 0.2em;
-    width: 65%;
+    width: 75%;
 }
+
   .choices-container {
     display: flex;
     flex-wrap: wrap;
@@ -73,17 +74,18 @@ a{
 .chat-container {
     align-items: center;
     background-color: #faf3ea;
-    border: 0.1em solid #023020;
+    border: 0.01em solid grey;
     width: 100%; 
     box-sizing: border-box; 
     padding: 0em 10em 0em 10em;
+    font-size: larger;
    
 }
 
 .explore-container {
     background-color: #faf3ea;
     max-width: 24%; 
-    border: 0.1em solid #023020;
+    border: 0.01em solid grey;
     box-sizing: border-box; 
     min-height: fit-content;
 }
@@ -113,15 +115,21 @@ a{
     display: inline-table;
     /* font-family: "Rouge Script", cursive; */
 }
+#outputArea ul {
+    padding-left: 7em;
+}
 
 
-
+span{
+    width: 95%;
+}
 
 #userMessage{
     /* align-self: flex-end; */
     display: inline-table;
     text-align: left;
-    width: 49%;
+    margin-left: 2em;
+    width: 30%;
     
 }
 
@@ -157,16 +165,17 @@ a{
     body{
         font-size: small;
     }
+    ul{
+        padding-left: 0.2em;
+        margin-left: 0.2em;
+    }
     .message-area{
-        width: 25em;
+        width: 20em;
         padding: -0.5em;
         height: 30em;
     }
     .chat-container{
         padding: 0.5em;
-    }
-    .input-container{
-        
     }
     #textInput{
         max-width: 12em;
@@ -178,24 +187,39 @@ a{
     #outputArea{
         margin-top: 3em;
         padding: 0.225em;
+        margin-left: 0;
         width: 55%;
         margin-top: 1em ;    }
 
+        #outputArea ul {
+            padding-left: 0em;
+            margin-left: 0em;
+        }
+
+        #userMessage{
+            margin-left: 0.2em;
+        }
+
+    li div{
+        width: 95%;
+    }
+
     #userMessage{
-        max-width: 35%;
+        max-width: 21%;
         
     }
-    /* .choices{
+    .choice{
+        width: 50%;
         display: block;
-         margin: 0 auto;
+        margin: 0 auto;
         align-self: center;
         align-items: center;
-        padding: 0.2em;
-        margin: 0.2em;
-        background-color: brown;
+        font-size: smaller;
+        padding: 0.3em;
+        margin: 0.4em;
         border-radius: 0.5em;
         text-align: center;
-    } */
+    }
 
 
   }
