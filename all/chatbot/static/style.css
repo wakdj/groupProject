@@ -105,6 +105,26 @@ img{
     display: none;
 }
 
+input{
+    border: 0.1em solid #faf3ea;
+    border-radius: 0.6em;
+    padding: 0.5em;
+    margin-top: 0.5em;
+}
+
+.btn{
+    background-color: #023020;
+    color: white;
+    border-radius: 1em;
+    margin-top: 0.5em ;
+    padding: 0.5em;
+}
+
+.btn:hover{
+    background-color: #023020 !important;
+}
+
+
 .input-container {
     text-align: center;
     align-self: center;

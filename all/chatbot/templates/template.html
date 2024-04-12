@@ -21,11 +21,9 @@
         <div class="explore-container">
         
                 <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p> <div id="loginForm" class="hidden">
-                    <form action="login" method="post">
-                        <input id = "emailField" class="hidden" type="email" placeholder="Email Address" name="email" value="{{
+                    <form action="/login" method="post">
+                        <input id = "emailField" type="email" placeholder="Email Address" name="email" value="{{
                             request.form.email }}">
-                        <input type="text" placeholder="Username" name="username" value="{{
-                          request.form.username }}">
                          <input type="password" placeholder="Password" name="password" value="{{
                           request.form.password }}">
                         <input id="submitLogin" class="btn btn-default" type="submit" value="Login">
@@ -57,9 +55,10 @@
             </div>
         </div>
     </div>
-
+    
+    <script src="{{ url_for('static', filename='user.js') }}" type="module"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="{{ url_for('static', filename='user.js') }}"></script>
+    
 </body>
 
 </html>

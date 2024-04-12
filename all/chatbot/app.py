@@ -8,17 +8,33 @@ app = Flask(__name__)
 def index_get():
     return render_template("template.html")
 
-@app.route('/', methods=['GET', 'POST'])
+@app.post('/login')
 def login():
-    error = None
-    success = None
-    if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            success = 'success'
-            return success
-    return error
+    message = ""
+    username = request.get_json().get("username")
+    password = request.get_json().get("password")
+    print(username)
+    print(password)
+    if username == 'admin' and password == 'admin':
+        message = 'success'
+    else:
+        message=  'Invalid Credentials. Please try again.'
+    message = {"answer": message}
+    print(message)
+    return jsonify(message)
+
+
+
+# @app.post('/createAccount')
+# def createAccount():
+#     error = None
+#     success = None
+#     if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+#         error = 'Invalid Credentials. Please try again.'
+#     else:
+#         success = 'success'
+#         return success
+#     return error
 
 
 
