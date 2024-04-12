@@ -4,8 +4,7 @@
         const predictButton = document.querySelector('#predictButton');
         const outputArea = document.querySelector('#outputArea > ul');
         const userMessage = document.querySelector("#userMessage > ul");
-        
-
+        const login = document.querySelector(".login")
         function predictMessage() {
             const message = textInput.value.trim();
             console.log(message);
@@ -181,7 +180,7 @@
                             const linkTag = document.createElement("a") 
                             elem.style.color = "pink"
                             const recommendationText = document.createTextNode(data.answer[0])
-                            const link = document.createTextNode("link");
+                            const link = document.createTextNode("Spotify link");
                             linkTag.appendChild(link);
                             linkTag.href = data.answer[1]
                             linkTag.target = "_blank"

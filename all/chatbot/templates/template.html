@@ -19,11 +19,23 @@
     <div class="container">
 
         <div class="explore-container">
-            <div id = "account">
-                <p>Placeholder: Click here to look at your account</p>
-                <p>Placeholder: Click here to look at past chats</p>
-                <p>Placeholder: Click here to explore</p>
-            </div>
+        
+                <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p> <div id="loginForm" class="hidden">
+                    <form action="login" method="post">
+                        <input id = "emailField" class="hidden" type="email" placeholder="Email Address" name="email" value="{{
+                            request.form.email }}">
+                        <input type="text" placeholder="Username" name="username" value="{{
+                          request.form.username }}">
+                         <input type="password" placeholder="Password" name="password" value="{{
+                          request.form.password }}">
+                        <input id="submitLogin" class="btn btn-default" type="submit" value="Login">
+                      </form>
+                      <button id ="newAccount" class="btn">New Account</button>
+                      <div class="response"><p></p></div>
+                </div>
+               </div>
+                <div class="side-bar-activities"><p>Past Chats <img src="../static/images/past-chat.webp" alt="login icon" height="17.5" width="17.5"></p></div>
+                <div class="side-bar-activities"><p>How To <img src="../static/images/how-to.webp" alt="login icon" height="17.5" width="17.5"></p></div>
         </div>
         <div class="chat-container">
             <h1>Moody Music ♫</h1>
@@ -47,6 +59,7 @@
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='user.js') }}"></script>
 </body>
 
 </html>

@@ -55,12 +55,23 @@ li div{
 
 a{
     color: #056846;
-    text-decoration: none;
+}
+
+.side-bar-activities{
+   margin-left: 1em;
+   width: 10em;
+    padding-bottom: 2em;
+}
+img{
+    vertical-align: middle;
+    margin-bottom: 0.1em;
 }
 /* a:hover{
-    color: #056846;
+    color: #301934;
 } */
-
+/* img{
+    padding-top: 0.2em;
+} */
 .container {
     display: flex;
     justify-content: wrap;
@@ -88,6 +99,10 @@ a{
     border: 0.01em solid grey;
     box-sizing: border-box; 
     min-height: fit-content;
+}
+
+.hidden{
+    display: none;
 }
 
 .input-container {

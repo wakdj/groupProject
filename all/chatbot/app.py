@@ -1,11 +1,26 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,redirect,url_for
 from models.chat import get_response,predict_class,get_intents,get_song
 
 app = Flask(__name__)
 
+
 @app.get("/")
 def index_get():
     return render_template("template.html")
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    error = None
+    success = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            success = 'success'
+            return success
+    return error
+
+
 
 @app.post("/predict")
 def predict():
