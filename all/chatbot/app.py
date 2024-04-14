@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify,redirect,url_for
 from models.chat import get_response,predict_class,get_intents,get_song
+from models.login import validEmail, passwordsMatch, validPassword
 
 app = Flask(__name__)
 
@@ -10,31 +11,38 @@ def index_get():
 
 @app.post('/login')
 def login():
-    message = ""
-    username = request.get_json().get("username")
-    password = request.get_json().get("password")
-    print(username)
-    print(password)
-    if username == 'admin' and password == 'admin':
-        message = 'success'
-    else:
-        message=  'Invalid Credentials. Please try again.'
+    message = "Success"
+    email = request.get_json().get("email")
+    firstPassword = request.get_json().get("password")
+    boolList = [validEmail(email),validPassword(firstPassword) ]
+    for b in boolList:
+        if(b != True):
+            message = b
     message = {"answer": message}
-    print(message)
     return jsonify(message)
 
 
 
-# @app.post('/createAccount')
-# def createAccount():
-#     error = None
-#     success = None
-#     if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-#         error = 'Invalid Credentials. Please try again.'
-#     else:
-#         success = 'success'
-#         return success
-#     return error
+@app.post('/createAccount')
+def createAccount():
+    message = "Success"
+    email = request.get_json().get("email")
+    firstPassword = request.get_json().get("password")
+    confirmPassword = request.get_json().get("confirmPassword")
+    boolList = [validEmail(email),passwordsMatch(firstPassword,confirmPassword),validPassword(firstPassword) ]
+    for b in boolList:
+        if(b != True):
+            message = b
+    message = {"answer": message}
+    return jsonify(message)
+    # if(validEmail(email) and passwordsMatch(firstPassword,confirmPassword) and validPassword(firstPassword)):
+    #     return "Success"
+    # if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+    #     error = 'Invalid Credentials. Please try again.'
+    # else:
+    #     success = 'success'
+    #     return success
+    # return error
 
 
 

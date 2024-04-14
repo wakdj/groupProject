@@ -20,19 +20,22 @@
 
         <div class="explore-container">
         
-                <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p> <div id="loginForm" class="hidden">
+                <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p> <p class="hidden" id = "logout">Logout <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p><div id="loginForm" class="hidden">
                     <form action="/login" method="post">
                         <input id = "emailField" type="email" placeholder="Email Address" name="email" value="{{
                             request.form.email }}">
                          <input type="password" placeholder="Password" name="password" value="{{
                           request.form.password }}">
+                          <input class="hidden" id="confirmPasswordField" type="password" placeholder="Confirm Password" name="confirmPassword" value="{{
+                            request.form.confirmPassword }}">
                         <input id="submitLogin" class="btn btn-default" type="submit" value="Login">
+                        <input id="createAccount" class="hidden btn btn-default" type="submit" value="Create Account">
                       </form>
                       <button id ="newAccount" class="btn">New Account</button>
                       <div class="response"><p></p></div>
                 </div>
                </div>
-                <div class="side-bar-activities"><p>Past Chats <img src="../static/images/past-chat.webp" alt="login icon" height="17.5" width="17.5"></p></div>
+                <div class="side-bar-activities past-chat"><p id="pastChats">Past Chats <img src="../static/images/past-chat.webp" alt="login icon" height="17.5" width="17.5"></p></div>
                 <div class="side-bar-activities"><p>How To <img src="../static/images/how-to.webp" alt="login icon" height="17.5" width="17.5"></p></div>
         </div>
         <div class="chat-container">
