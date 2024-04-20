@@ -2,9 +2,13 @@
     document.addEventListener('DOMContentLoaded', function () {
         const textInput = document.querySelector('#textInput');
         const predictButton = document.querySelector('#predictButton');
+        const exploreContainer = document.querySelector(".explore-container")
+        console.log(exploreContainer.style.display + "hi")
         const outputArea = document.querySelector('#outputArea > ul');
         const userMessage = document.querySelector("#userMessage > ul");
         const login = document.querySelector(".login")
+        const toggleButton = document.querySelector('#toggleSideBar');
+        toggleButton.addEventListener('click', toggleSideBar);
         function predictMessage() {
             const message = textInput.value.trim();
             console.log(message);
@@ -88,8 +92,9 @@
                 });
             }
         }
-
+        
         predictButton.addEventListener('click', predictMessage);
+        //toggleSideBar()
     });
 
     function adjustHeightDifference(userMessage,outputArea) {
@@ -198,4 +203,32 @@
             });
         });
     }
+
+    function toggleSideBar(e){
+        console.log("called")
+        e.preventDefault()
+        const activites = document.querySelector('#sideBarContainer');
+        const container = document.querySelector('.explore-container');
+        const toggleButton = document.querySelector("#toggleSideBar")
+
+        // const colour =  container.style.backgroundColor === "rgba(230,215,255,0.4)" ? "transparent" : "rgba(230,215,255,0.4)";
+        // const displayType = activites.style.display === "block" ? "none" : "block";
+        let displayType = ""
+        let bgColour = ""
+        if(activites.style.display === "block"){
+            displayType = "none"
+            bgColour = "transparent"
+            toggleButton.style.transform = "rotate(0deg)" 
+        } else{
+             displayType = "block"
+             bgColour = "rgba(230,215,255,0.4)"
+             toggleButton.style.transform = "rotate(90deg)"   
+        }
+        activites.style.display =  displayType
+        container.style.backgroundColor = bgColour
+        activites.style.transition = "opacity 0.5s ease";
+        container.style.transition = "background-color 0.5s ease";
+          
+        
+        }
     

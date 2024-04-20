@@ -13,13 +13,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 </head>
 
 <body>
     <div class="container">
 
         <div class="explore-container">
-        
+            <div class="side-bar-toggle">
+                <button id="toggleSideBar"><img src="../static/images/menuimg.png" alt="Menu Logo"></button>
+                </div>
+                <div id="sideBarContainer">
                 <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p> <p class="hidden" id = "logout">Logout <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p><div id="loginForm" class="hidden">
                     <form action="/login" method="post">
                         <input id = "emailField" type="email" placeholder="Email Address" name="email" value="{{
@@ -35,9 +39,14 @@
                       <div class="response"><p></p></div>
                 </div>
                </div>
+               
                 <div class="side-bar-activities past-chat"><p id="pastChats">Past Chats <img src="../static/images/past-chat.webp" alt="login icon" height="17.5" width="17.5"></p></div>
                 <div class="side-bar-activities"><p>How To <img src="../static/images/how-to.webp" alt="login icon" height="17.5" width="17.5"></p></div>
+            </div>
         </div>
+        <!-- <div class="side-bar-toggle">
+        <button id="toggleSideBar">></button>
+        </div> -->
         <div class="chat-container">
             <h1>Moody Music ♫</h1>
             <div class="message-area">

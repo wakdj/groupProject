@@ -403,7 +403,7 @@ function checkAuthState() {
             confirmPasswordFieldInput.classList.toggle("hidden")
             submitNewAccount.classList.toggle("hidden")
             submitLogin.classList.toggle("hidden")
-           const textOption = confirmPasswordFieldInput.classList.value === "" ? ["Create Account","Go Back To Login"] : ["Login", "Create a New Account"]
+           const textOption = confirmPasswordFieldInput.classList.value === "" ? ["Create Account","Go Back To Login"] : ["Login", "New Account"]
             newAccount.textContent = textOption[1]
             if(confirmPasswordFieldInput.classList === ""){
                 submitLogin.disabled = true;
