@@ -2,11 +2,14 @@ body {
     font-family: "EB Garamond", serif;
     background-color: #faf3ea;
     margin: 0;
+    height: 100%;
+    overflow: hidden;
     padding: 0;
     color: #023020;
     box-sizing: border-box;
         font-size: larger;
-    height: 100vh;
+    /* height: 100vh;
+    max-height: 100vh; */
     max-width: 100%;
 }
 
@@ -77,9 +80,8 @@ img{
     display: flex;
     justify-content: wrap;
     margin: 0.5em auto;
-    /* padding: 0.6em;
-    background-color: #faf3ea;
-    */
+
+    min-height: 100vh !important;
      width: auto;
 }
 
@@ -87,22 +89,24 @@ img{
     align-items: center;
     background-color: #faf3ea;
     border-bottom: 0.01em solid #023020;
-    width: 100%; 
-    box-sizing: border-box; 
+    width: 100%;
+    box-sizing: border-box;
     padding: 0em 7.5em 0em 7.5em;
     font-size: larger;
-    max-height: fit-content;
-   
+    min-height: 100vh;
+
+     /* max-height: 97%; */
+
 }
 
 .explore-container {
     background-color: #faf3ea;
-    max-width: 24%; 
+    max-width: 24%;
     padding-top: 2em;
     border-right: 0.01em solid #023020;
     border-bottom: 0.01em solid #023020;
-    box-sizing: border-box; 
-    min-height: fit-content;
+    box-sizing: border-box;
+    /* min-height: fit-content; */
 }
 
 .hidden{
@@ -136,7 +140,7 @@ input{
 }
 
 .message-area{
-    height: 20em;
+    min-height: 63%;
     align-items: center;
     border-radius: 2em;
     width: 50em;
@@ -145,10 +149,10 @@ input{
     scrollbar-width: none
 }
 
-#outputArea{  
+#outputArea{
     /* align-self: flex-start; */
     margin-top: 1em;
-    height: 100%;
+    /* height: 100%; */
     width: 49%;
     padding-left: 0.5em;
     display: inline-table;
@@ -170,7 +174,7 @@ span{
     margin-left: 2em;
     width: 30%;
     padding-left: 0.75em;
-    
+
 }
 
 
@@ -218,8 +222,7 @@ span{
     }
 
     #userMessage li{
-    
-        max-width: 2em;   
+        max-width: 2em;
     }
     .container{
         margin: 0;
@@ -243,14 +246,14 @@ span{
         background-color: transparent;
         position: absolute;
         z-index: 333;
-        height: 90%; 
+        min-height: 100vh;
     }
     .side-bar-toggle{
         margin-top: 0.5em;
         display: block;
         margin-left: 0.5em;
     }
-   
+
     #toggleSideBar{
         display: block;
         border-radius: 0.75em;
@@ -259,7 +262,7 @@ span{
     }
     #sideBarContainer{
         display: none;
-        
+
     }
 
     ul{
@@ -269,7 +272,7 @@ span{
     .message-area{
         width: 20em;
         padding: -0.5em;
-        height: 30em;
+        /* height: 25em; */
     }
     .chat-container{
         padding: 0 0.5em;
@@ -304,7 +307,7 @@ span{
 
     #userMessage{
         max-width: 21%;
-        
+
     }
     .choice{
         width: 50%;

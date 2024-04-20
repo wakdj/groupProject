@@ -221,7 +221,7 @@
             toggleButton.style.transform = "rotate(0deg)" 
         } else{
              displayType = "block"
-             bgColour = "rgba(230,215,255,0.4)"
+             bgColour = "rgba(230,215,255,0.8)"
              toggleButton.style.transform = "rotate(90deg)"   
         }
         activites.style.display =  displayType
