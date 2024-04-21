@@ -3,7 +3,7 @@ body {
     background-color: #faf3ea;
     margin: 0;
     height: 100%;
-    /* overflow: hidden; */
+    overflow: hidden;
     padding: 0;
     color: #023020;
     box-sizing: border-box;
