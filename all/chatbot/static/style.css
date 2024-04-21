@@ -271,7 +271,7 @@ span{
     }
     .message-area{
         width: 20em;
-        padding: -0.5em;
+        padding: 2.5em;
         /* height: 25em; */
     }
     .chat-container{
@@ -306,7 +306,7 @@ span{
     }
 
     #userMessage{
-        max-width: 21%;
+        max-width: 25%;
 
     }
     .choice{
