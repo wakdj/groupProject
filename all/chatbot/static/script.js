@@ -219,10 +219,14 @@
             displayType = "none"
             bgColour = "transparent"
             toggleButton.style.transform = "rotate(0deg)" 
+            container.style.width = "0%"
+            container.style.maxWidth = "0%"
         } else{
              displayType = "block"
              bgColour = "rgba(230,215,255,0.8)"
-             toggleButton.style.transform = "rotate(90deg)"   
+             toggleButton.style.transform = "rotate(90deg)"  
+             container.style.width = "40%"
+            container.style.maxWidth = "40%" 
         }
         activites.style.display =  displayType
         container.style.backgroundColor = bgColour
