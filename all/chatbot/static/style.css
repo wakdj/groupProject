@@ -70,6 +70,11 @@ img{
     width: 1.75em;
     height: 1.75em;
 }
+
+#logo{
+    width: 3.5em;
+    height: 1.5em;
+}
 /* a:hover{
     color: #301934;
 } */
@@ -147,9 +152,17 @@ input{
     width: 50em;
     width: 100%;
     overflow-y: scroll;
-    scrollbar-width: none
+    scrollbar-width:thin;
+    /* scrollbar-width: none */
 }
-
+.pastChatUl{
+    padding: 0em;
+}
+.previous-chat{
+    background-color:#ebdbc6 ;
+    border-radius: 1em;
+    padding: 1em;
+}
 #outputArea{
     /* align-self: flex-start; */
     margin-top: 1em;
@@ -206,7 +219,11 @@ span{
     display: none;
 }
 
-
+.past-chat ul {
+    overflow-y: scroll;
+    scrollbar-width:thin;
+    max-height: 10em;
+}
 .space{
     padding-bottom:0em ;
     margin: 0;
@@ -232,7 +249,11 @@ span{
         width: 90% ;
         height: 0.5em;
     }
-
+    .previous-chat{
+        background-color:#cdb9ed ;
+        border-radius: 1em;
+        padding: 1em;
+    }
     .btn{
         font-size: smaller;
         height: 2.2em;

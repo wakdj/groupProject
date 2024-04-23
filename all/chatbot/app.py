@@ -51,7 +51,6 @@ def predict():
     text = request.get_json().get("message")
     ints = predict_class(text)
     res = get_response(ints, get_intents())
-    #response = get_response(text)
     message = {"answer": res}
     return jsonify(message)
 

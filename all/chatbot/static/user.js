@@ -59,7 +59,7 @@ function checkAuthState() {
         removeSaveButton()
         removePastChats()
         clearHTML()
-        
+        removeloginResponse()
         console.log("No user is signed in.");
     }
 }
@@ -78,10 +78,15 @@ function checkAuthState() {
         inputArea.appendChild(newButton)
         save()
     }
-
+    function removeloginResponse(){
+        const responseArea = document.querySelector(".response p")
+        responseArea.textContent = ""
+    }
     function displayPastChatNames() {
         const pastChatP = document.querySelector("#pastChats");
         const pastChatDiv = document.querySelector(".past-chat");
+        const unorderedList = document.createElement("ul")
+        unorderedList.classList.add("pastChatUl")
         const dbRef = ref(database);
         const userId = auth.currentUser.uid;
         let chatNames = []
@@ -105,20 +110,21 @@ function checkAuthState() {
                 }
             })
             .then((chatNames) => {
-                console.log(chatNames)
+                // console.log(chatNames)
                 const chatNameElements = chatNames.map(chatName => {
-                    const newP = document.createElement("p");
-                    newP.classList.add("previous-chat");
-                    newP.classList.add("hidden");
-                    newP.textContent = chatName;
-                    return newP;
+                    const newli = document.createElement("li");
+                    newli.classList.add("previous-chat");
+                    newli.classList.add("hidden");
+                    newli.textContent = chatName;
+                    return newli;
                 });
                 return chatNameElements;
             })
             .then((chatNameElements) => {
                 chatNameElements.forEach(element => {
-                    pastChatDiv.appendChild(element);
+                    unorderedList.appendChild(element);
                 });
+                pastChatDiv.appendChild(unorderedList)
             })
             .catch((error) => {
                 console.error(error);
@@ -147,7 +153,7 @@ function checkAuthState() {
                 const res = snapshot.val();
                 userMessages = res[elem]["userDict"]
                 botResponse = res[elem]["botDict"]
-                userMessages.forEach((e,index) =>{
+                userMessages?.forEach((e,index) =>{
                     chats[e] = botResponse[index]
                 })
                 // console.log(userMessages)
@@ -329,7 +335,10 @@ function checkAuthState() {
         
         saveButton.addEventListener("click",()=>{
             console.log("clicked")
-           const chatName =  prompt("Name your chat")
+           let chatName =  prompt("Name your chat")
+           if(chatName === ""){
+            chatName = "Chat saved at: " + new Date().toLocaleTimeString()
+           }
             const userDict = {}
             const botDict = {}
             const userMessagesRef = ref(database, 'users/' + auth.currentUser.uid + '/messages');
@@ -380,6 +389,7 @@ function checkAuthState() {
                     arr.shift()
                     botDict[(index)] = arr
                 }
+                //displayPastChatNames()
                 console.log(userDict)
                 console.log(botDict)
                 
@@ -444,10 +454,15 @@ function checkAuthState() {
                     }).catch((error) => {
                       const errorCode = error.code;
                       const errorMessage = error.message;
-                      console.log(errorCode)
+                      console.log(errorMessage[0])
+                      const responseElement = document.querySelector('.response p');
+                      responseElement.textContent = errorMessage;
                       
                     });
                 // });
+                } else{
+                    const responseElement = document.querySelector('.response p');
+                    responseElement.textContent = data.answer;
                 }
             })
             .catch(error => {
@@ -488,7 +503,9 @@ function checkAuthState() {
                     createUserWithEmailAndPassword(auth, email, password).then(cred => {
                         console.log(cred);
                          const responseElement = document.querySelector('.response p');
-                         responseElement.textContent = "You can now go back and login.";
+                         responseElement.textContent = data.answer;
+                         const loginForm = document.querySelector("#loginForm")
+                         loginForm.classList.add("hidden")
                          console.log(auth.currentUser)
                          set(ref(database, 'users/' + auth.currentUser.uid), {
                             email: email,
@@ -500,9 +517,14 @@ function checkAuthState() {
                       const errorCode = error.code;
                       const errorMessage = error.message;
                       console.log(errorCode)
+                      const responseElement = document.querySelector('.response p');
+                         responseElement.textContent = error.message
                       
                     });
                 // });
+                }else{
+                    const responseElement = document.querySelector('.response p');
+                    responseElement.textContent = data.answer;
                 }
             })
             .catch(error => {
