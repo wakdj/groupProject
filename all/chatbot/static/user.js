@@ -25,6 +25,7 @@ REFACTORING NEEDED DUE TO THE AMOUNT OF REPETITION
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    
     console.log(app)
     console.log(analytics)
     console.log(auth)
@@ -39,10 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmPasswordFieldInput = document.querySelector("#confirmPasswordField")
     const unorderedList = document.createElement("ul")
     unorderedList.classList.add("hidden")
-    const emptyChat = document.createElement("li")
-    emptyChat.classList.add("previous-chat")
-    emptyChat.textContent = "New Chat"
-    unorderedList.appendChild(emptyChat)
+    
+    checkAuthState()
+    
     
 function checkAuthState() {
     const user = auth.currentUser;
@@ -63,10 +63,12 @@ function checkAuthState() {
               });
         })
     } else {
+        
         removeSaveButton()
         removePastChats()
         clearHTML()
         removeloginResponse()
+        clearPastChats()
         console.log("No user is signed in.");
     }
 }
@@ -77,9 +79,32 @@ function checkAuthState() {
     checkAuthState();
 
     function newChat(){
+       const emptyChat = document.querySelector(".empty")
         emptyChat.addEventListener("click", () =>{
             clearHTML()
         }) 
+    }
+
+    function clearPastChats(){
+       const childNodes = Array.from(unorderedList.childNodes);
+        childNodes.forEach(e => {
+            if (e.nodeName === "LI") {
+                unorderedList.removeChild(e);
+                console.log(e.textContent);
+                console.log("removed");
+            }
+        });
+        const pastChatP = document.querySelector("#pastChats")
+        const pastChatDiv = document.querySelector(".past-chat");
+        pastChatDiv.appendChild(unorderedList)
+        
+        const li = document.createElement("li")
+        li.textContent = "You are not logged in"
+        unorderedList.appendChild(li)
+        // pastChatP.addEventListener("click", () =>{
+        //     //unorderedList.classList.toggle("hidden")
+        //     //console.log("toggled")
+        // })
     }
     function addSaveButton(){
         const inputArea = document.querySelector(".input-container")
@@ -96,18 +121,22 @@ function checkAuthState() {
     }
 
     function displayPastChatNames() {
+        const childNodes = Array.from(unorderedList.childNodes);
+        childNodes.forEach(e => {
+            if (e.nodeName === "LI") {
+                unorderedList.removeChild(e);
+                console.log(e.textContent);
+                console.log("removed");
+            }
+        });
         const pastChatP = document.querySelector("#pastChats");
         const pastChatDiv = document.querySelector(".past-chat");
         unorderedList.classList.add("pastChatUl")
-    //    const childNodes = Array.from(unorderedList.childNodes);
-
-    //     childNodes.forEach(e => {
-    //         if (e.nodeName === "LI") {
-    //             unorderedList.removeChild(e);
-    //             console.log(e.textContent);
-    //             console.log("removed");
-    //         }
-    //     });
+        const emptyChat = document.createElement("li")
+        emptyChat.classList.add("empty")
+        emptyChat.classList.add("previous-chat")
+        emptyChat.textContent = "New Chat"
+        unorderedList.appendChild(emptyChat)
         const dbRef = ref(database);
         const userId = auth.currentUser.uid;
         let chatNames = new Set()
@@ -154,6 +183,7 @@ function checkAuthState() {
         pastChatP.addEventListener("click", () => {
            const pastChatPs = document.querySelectorAll(".previous-chat")
             unorderedList.classList.toggle("hidden")
+            console.log("toggled")
             pastChatPs.forEach(e =>{
             e.addEventListener("click",()=>{
                 // console.log("iwufnw")
