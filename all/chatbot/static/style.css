@@ -235,6 +235,7 @@ span{
     border-radius: 0.5em;
     border: none;
     margin-left: 0.75em;
+    color: #faf3ea;
 }
 @media only screen and (max-width: 1000px) {
     .chat-container{
@@ -281,6 +282,12 @@ span{
         margin-top: 0.5em;
         display: block;
         margin-left: 0.5em;
+    }
+    .delete{
+        margin-left: 0.5em;
+        font-size: xx-small;
+        text-align: center;
+        color: #faf3ea;
     }
 
     #toggleSideBar{

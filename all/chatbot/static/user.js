@@ -198,10 +198,12 @@ function checkAuthState() {
         unorderedList.addEventListener("click", (event) => {
             if (event.target.tagName === "LI") {
                 const pastChats = event.target;
+                let pastChatsText = pastChats.textContent
+                pastChatsText = pastChatsText.substring(0, pastChatsText.length - 1);
                 console.log(pastChats.textContent + " rwegfurnu9rg");
     
                 if (pastChats.textContent !== "New Chat") {
-                    displayPastMessages(pastChats.textContent);
+                    displayPastMessages(pastChatsText);
                     console.log("iwufnw");
                 }
             }
