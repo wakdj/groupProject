@@ -263,8 +263,8 @@ span{
 
     .explore-container{
         border: none;
-        max-width:40%;
-        width: 40%;
+        max-width:0%;
+        width: 0%;
         background-color: transparent;
         position: absolute;
         z-index: 333;

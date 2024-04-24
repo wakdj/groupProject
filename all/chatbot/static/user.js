@@ -37,6 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitLogin = document.querySelector("#submitLogin")
     const submitNewAccount = document.querySelector("#createAccount")
     const confirmPasswordFieldInput = document.querySelector("#confirmPasswordField")
+    const unorderedList = document.createElement("ul")
+    unorderedList.classList.add("hidden")
+    const emptyChat = document.createElement("li")
+    emptyChat.classList.add("previous-chat")
+    emptyChat.textContent = "New Chat"
+    unorderedList.appendChild(emptyChat)
     
 function checkAuthState() {
     const user = auth.currentUser;
@@ -46,6 +52,7 @@ function checkAuthState() {
         loginP.classList.add("hidden")
         addSaveButton()
         displayPastChatNames()
+        newChat()
         logoutP.addEventListener("click",() =>{
             signOut(auth).then(() => {
                 logoutP.classList.add("hidden")
@@ -69,6 +76,11 @@ function checkAuthState() {
     });
     checkAuthState();
 
+    function newChat(){
+        emptyChat.addEventListener("click", () =>{
+            clearHTML()
+        }) 
+    }
     function addSaveButton(){
         const inputArea = document.querySelector(".input-container")
         const newButton = document.createElement("button")
@@ -82,14 +94,23 @@ function checkAuthState() {
         const responseArea = document.querySelector(".response p")
         responseArea.textContent = ""
     }
+
     function displayPastChatNames() {
         const pastChatP = document.querySelector("#pastChats");
         const pastChatDiv = document.querySelector(".past-chat");
-        const unorderedList = document.createElement("ul")
         unorderedList.classList.add("pastChatUl")
+    //    const childNodes = Array.from(unorderedList.childNodes);
+
+    //     childNodes.forEach(e => {
+    //         if (e.nodeName === "LI") {
+    //             unorderedList.removeChild(e);
+    //             console.log(e.textContent);
+    //             console.log("removed");
+    //         }
+    //     });
         const dbRef = ref(database);
         const userId = auth.currentUser.uid;
-        let chatNames = []
+        let chatNames = new Set()
         get(child(dbRef, `users/${userId}`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
@@ -97,24 +118,24 @@ function checkAuthState() {
                     console.log(res)
                     for (const key in res) {
                         if (!key.includes("email") && !key.includes("profile_picture")) {
-                            chatNames.push(key);
+                            chatNames.add(key);
                         }
                     }
                     if(chatNames.length === 0){
-                        chatNames.push("No chats available")
+                        chatNames.add("No chats available")
                     }
-                    return chatNames;
+                    const chatNameArr = Array.from(chatNames)
+                    console.log(chatNameArr)
+                    return chatNameArr
                 } else {
                     throw new Error("Fail");
                     
                 }
             })
-            .then((chatNames) => {
-                // console.log(chatNames)
-                const chatNameElements = chatNames.map(chatName => {
+            .then((chatNameArr) => {
+                const chatNameElements = chatNameArr.map(chatName => {
                     const newli = document.createElement("li");
                     newli.classList.add("previous-chat");
-                    newli.classList.add("hidden");
                     newli.textContent = chatName;
                     return newli;
                 });
@@ -132,9 +153,11 @@ function checkAuthState() {
 
         pastChatP.addEventListener("click", () => {
            const pastChatPs = document.querySelectorAll(".previous-chat")
-           pastChatPs.forEach(e =>{
-            e.classList.toggle("hidden")
+            unorderedList.classList.toggle("hidden")
+            pastChatPs.forEach(e =>{
             e.addEventListener("click",()=>{
+                // console.log("iwufnw")
+                if(e.textContent !== "New Chat")
                 displayPastMessages(e.textContent)
             })
            })
@@ -335,7 +358,7 @@ function checkAuthState() {
         
         saveButton.addEventListener("click",()=>{
             console.log("clicked")
-           let chatName =  prompt("Name your chat")
+           let chatName =  prompt("Name your chat").trim()
            if(chatName === ""){
             chatName = "Chat saved at: " + new Date().toLocaleTimeString()
            }
@@ -389,10 +412,8 @@ function checkAuthState() {
                     arr.shift()
                     botDict[(index)] = arr
                 }
-                //displayPastChatNames()
                 console.log(userDict)
                 console.log(botDict)
-                
             });
 
             set(ref(database, 'users/' + auth.currentUser.uid + "/" + chatName), {
