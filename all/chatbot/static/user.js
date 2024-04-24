@@ -3,7 +3,7 @@
 
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
   import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js'
-  import { getDatabase, ref, set,get,child } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js'
+  import { getDatabase, ref, set,get,child,remove } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js'
 
 /*
 REFACTORING NEEDED DUE TO THE AMOUNT OF REPETITION
@@ -133,6 +133,7 @@ function checkAuthState() {
         const pastChatDiv = document.querySelector(".past-chat");
         unorderedList.classList.add("pastChatUl")
         const emptyChat = document.createElement("li")
+        
         //emptyChat.classList.add("previous-chat")
         emptyChat.classList.add("empty")
         emptyChat.textContent = "New Chat"
@@ -166,6 +167,10 @@ function checkAuthState() {
                     const newli = document.createElement("li");
                     newli.classList.add("previous-chat");
                     newli.textContent = chatName;
+                    const span = document.createElement("button")
+                    span.classList.add("delete")
+                    span.textContent = "X"
+                    newli.appendChild(span)
                     return newli;
                 });
                 return chatNameElements;
@@ -179,21 +184,6 @@ function checkAuthState() {
             .catch((error) => {
                 console.error(error);
             });
-
-        
-        //    const pastChatPs = document.querySelectorAll(".previous-chat")
-        //    console.log(pastChatPs)
-        //     pastChatPs.forEach(e =>{
-        //         console.log(e.textContent + " rwegfurnu9rg")
-        //     e.addEventListener("click",()=>{
-        //         console.log("fwefewfwfwrf")
-        //         if(e.textContent !== "New Chat"){
-        //         displayPastMessages(e.textContent)
-        //         console.log("iwufnw")
-        //         }
-        //     })
-        //    })
-        // }); 
     }
 
     function toggleP() {
@@ -218,6 +208,28 @@ function checkAuthState() {
         });
     }
 
+    function deleteChatFromDB(){
+            unorderedList.addEventListener("click", (event) => {
+                if (event.target.tagName === "BUTTON") {
+                    const pastChats = event.target;
+                    let chatName = pastChats.parentNode.textContent;
+                    chatName = chatName.substring(0, chatName.length - 1);
+                    console.log(chatName);
+                    console.log(pastChats.textContent);
+                    //const dbRef = ref(database);
+                    const userId = auth.currentUser.uid;
+                    const chatRefToRemove = ref(database, `users/${userId}/${chatName}`);
+                    remove(chatRefToRemove)
+                        .then(() => {
+                            //console.log("removed");
+                        })
+                        .catch((error) => {
+                            console.error("fail");
+                        });
+                }
+            });
+    }
+
     function displayPastMessages(elem){
         const dbRef = ref(database);
         const userId = auth.currentUser.uid;
@@ -233,10 +245,6 @@ function checkAuthState() {
                 userMessages?.forEach((e,index) =>{
                     chats[e] = botResponse[index]
                 })
-                // console.log(userMessages)
-                // console.log(botResponse)
-                // console.log("******************")
-                // console.log(chats)
                 return chats
             } else {
                 throw new Error("Fail");
@@ -614,6 +622,6 @@ function checkAuthState() {
     toggleP()
     login();
     createAccount();
-    
+    deleteChatFromDB()
 });
 

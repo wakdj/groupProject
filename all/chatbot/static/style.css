@@ -229,6 +229,13 @@ span{
     margin: 0;
     background-color:#faf3ea ;
 }
+
+.delete{
+    background-color: red;
+    border-radius: 0.5em;
+    border: none;
+    margin-left: 0.75em;
+}
 @media only screen and (max-width: 1000px) {
     .chat-container{
         padding: 0;
