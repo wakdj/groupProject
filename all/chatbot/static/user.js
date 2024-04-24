@@ -133,8 +133,8 @@ function checkAuthState() {
         const pastChatDiv = document.querySelector(".past-chat");
         unorderedList.classList.add("pastChatUl")
         const emptyChat = document.createElement("li")
+        //emptyChat.classList.add("previous-chat")
         emptyChat.classList.add("empty")
-        emptyChat.classList.add("previous-chat")
         emptyChat.textContent = "New Chat"
         unorderedList.appendChild(emptyChat)
         const dbRef = ref(database);
@@ -180,18 +180,42 @@ function checkAuthState() {
                 console.error(error);
             });
 
+        
+        //    const pastChatPs = document.querySelectorAll(".previous-chat")
+        //    console.log(pastChatPs)
+        //     pastChatPs.forEach(e =>{
+        //         console.log(e.textContent + " rwegfurnu9rg")
+        //     e.addEventListener("click",()=>{
+        //         console.log("fwefewfwfwrf")
+        //         if(e.textContent !== "New Chat"){
+        //         displayPastMessages(e.textContent)
+        //         console.log("iwufnw")
+        //         }
+        //     })
+        //    })
+        // }); 
+    }
+
+    function toggleP() {
+        const pastChatP = document.querySelector("#pastChats");
+       
+    
         pastChatP.addEventListener("click", () => {
-           const pastChatPs = document.querySelectorAll(".previous-chat")
-            unorderedList.classList.toggle("hidden")
-            console.log("toggled")
-            pastChatPs.forEach(e =>{
-            e.addEventListener("click",()=>{
-                // console.log("iwufnw")
-                if(e.textContent !== "New Chat")
-                displayPastMessages(e.textContent)
-            })
-           })
-        }); 
+            unorderedList.classList.toggle("hidden");
+            console.log("toggled");
+        });
+    
+        unorderedList.addEventListener("click", (event) => {
+            if (event.target.tagName === "LI") {
+                const pastChats = event.target;
+                console.log(pastChats.textContent + " rwegfurnu9rg");
+    
+                if (pastChats.textContent !== "New Chat") {
+                    displayPastMessages(pastChats.textContent);
+                    console.log("iwufnw");
+                }
+            }
+        });
     }
 
     function displayPastMessages(elem){
@@ -220,6 +244,7 @@ function checkAuthState() {
             }
         })
         .then((chats) => {
+            console.log("reached")
             clearHTML()
             populate(chats)
         })
@@ -586,6 +611,7 @@ function checkAuthState() {
                 }
     
     toggleLoginView();
+    toggleP()
     login();
     createAccount();
     
