@@ -30,7 +30,7 @@
                     <form action="/login" method="post">
                         <input id = "emailField" type="email" placeholder="Email Address" name="email" value="{{
                             request.form.email }}">
-                         <input type="password" placeholder="Password" name="password" value="{{
+                         <input id="firstPassword" type="password" placeholder="Password" name="password" value="{{
                           request.form.password }}">
                           <input class="hidden" id="confirmPasswordField" type="password" placeholder="Confirm Password" name="confirmPassword" value="{{
                             request.form.confirmPassword }}">

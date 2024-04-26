@@ -231,7 +231,7 @@ span{
 }
 
 .delete{
-    background-color: red;
+    background-color: #FF6961;
     border-radius: 0.5em;
     border: none;
     margin-left: 0.75em;

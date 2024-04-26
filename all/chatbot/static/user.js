@@ -223,7 +223,7 @@ function checkAuthState() {
                     const chatRefToRemove = ref(database, `users/${userId}/${chatName}`);
                     remove(chatRefToRemove)
                         .then(() => {
-                            //console.log("removed");
+                            alert(`Chat "${chatName}" will be deleted from our database shortly.`)
                         })
                         .catch((error) => {
                             console.error("fail");
