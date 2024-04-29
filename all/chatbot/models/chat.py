@@ -41,6 +41,7 @@ stop_words = set(stopwords.words('english'))
 def get_intents():
     return intents
 
+# preprocessing sentences
 def clean(sentence):
     sentence_words = nltk.word_tokenize(sentence)
     sentence_words = [word for word in sentence_words if word.lower() not in stop_words]
@@ -82,7 +83,6 @@ def get_response(intents_list, intents_json):
     return result + "~" + tag 
 
 def get_song(m,s):
-    # start_sentence_options = ["You might like ", ""]
     songs = None
     for x in song_data:
         if(x["category"] == m):

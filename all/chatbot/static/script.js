@@ -9,6 +9,8 @@
         const login = document.querySelector(".login")
         const toggleButton = document.querySelector('#toggleSideBar');
         toggleButton.addEventListener('click', toggleSideBar);
+
+
         function predictMessage() {
             const message = textInput.value.trim();
             console.log(message);
@@ -35,53 +37,24 @@
                     const spaceForBot = document.createElement("br")
                     const spaceForUser = document.createElement("br")
                     const spaceForChoices = document.createElement("br")
-                    // const choice1 = document.createElement("span")
-                    // const choice2 = document.createElement("span")
-                    // const choice3 = document.createElement("span")
-
                     const newLiForBot = document.createElement("li");
                     const newLiForUser = document.createElement("li");
                     const newSpanForBot = document.createElement("span");
                     const newSpanForUser = document.createElement("span")
-                    // const newDivForChoices = document.createElement("div");
                     const newDivForBot = document.createElement("div");
                     const newDivForUser = document.createElement("div");
-                    
                     const responseText = document.createTextNode(botText);
-                    
-                    // const intentText = document.createTextNode(intent);
-                    // const op2 = document.createTextNode("option 2")
-                    // const op3 = document.createTextNode("option 3")
-                    
-                    
                     newSpanForBot.appendChild(responseText)
-
-                    // choice1.classList.add("choice")
-                    // choice2.classList.add("choice")
-                    // choice3.classList.add("choice")
                     spaceForChoices.classList.add("choices-container")
-                    // choice1.appendChild(intentText)
-                    // choice2.appendChild(op2)
-                    // choice3.appendChild(op3)
-                    
-
                     newDivForBot.appendChild(newSpanForBot);
                     newDivForBot.appendChild(spaceForChoices);
-                    
-                    // newDivForChoices.appendChild(choice1);
-                    // newDivForChoices.appendChild(choice2);
-                    // newDivForChoices.appendChild(choice3);
-                    // newDivForBot.appendChild(newDivForChoices)
-                   // console.log(song_data)
                     newLiForBot.appendChild(newDivForBot);
                     newLiForBot.appendChild(spaceForBot);
-
                     const userText = document.createTextNode(message);
                     newSpanForUser.appendChild(userText)
                     newDivForUser.appendChild(newSpanForUser)
                     newLiForUser.appendChild(newDivForUser);
                     newLiForUser.appendChild(spaceForUser);
-                  //  displayOptions(intent,newDivForBot);
                     userMessage.appendChild(newLiForUser);
                     outputArea.appendChild(newLiForBot);
                     displayOptions(userMessage, intent,newDivForBot,outputArea);
@@ -97,6 +70,10 @@
         //toggleSideBar()
     });
 
+    /*
+    makes the heights of the chat response and user message
+    the same  heigh
+    */
     function adjustHeightDifference(userMessage,outputArea) {
         const chatResponseHeight = outputArea.getClientRects()[0].height;
         const userInputHeight = userMessage.getClientRects()[0].height;
@@ -204,6 +181,7 @@
         });
     }
 
+    // only for mobile view
     function toggleSideBar(e){
         console.log("called")
         e.preventDefault()

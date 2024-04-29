@@ -71,7 +71,7 @@ function checkAuthState() {
         clearHTML()
         removeloginResponse()
         clearPastChats()
-        toggleDeleteAccountView()
+        removeDeleteAccountButton()
         console.log("No user is signed in.");
     }
 }
@@ -95,6 +95,12 @@ function checkAuthState() {
         deleteAccountDiv.classList.toggle("hidden")
     }
 
+    function removeDeleteAccountButton(){
+        const deleteBTn = document.querySelector(".delete-account")
+        if(!deleteBTn.classList.contains("hidden")){
+            deleteBTn.classList.add("hidden")
+        }
+    }
 
     // clearing the html rendered in the past chat area so
     function clearPastChats(){
@@ -133,7 +139,7 @@ function checkAuthState() {
 
     function displayPastChatNames() {
         // removing any nodes already there. i think this is not required
-        // but i don't want to remove it
+        // but i don't want to remove it just in case
         const childNodes = Array.from(unorderedList.childNodes);
         childNodes.forEach(e => {
             if (e.nodeName === "LI") {
@@ -261,8 +267,9 @@ function checkAuthState() {
 
         })
     }
-
-
+    /*
+    gets oast chats from db
+    */
     function displayPastMessages(elem){
         const dbRef = ref(database);
         const userId = auth.currentUser.uid;
@@ -294,6 +301,9 @@ function checkAuthState() {
         });
     }
 
+    /* 
+    clears the chat area
+    */ 
     function clearHTML(){
         const outputArea = document.querySelector("#outputArea");
         const outputUL = outputArea.querySelector("ul");
@@ -360,7 +370,7 @@ function checkAuthState() {
 
     }
 
-    // adding option buttons to one old response
+    // adding genre option buttons to one old response
     function addButtons(buttonText,area){
         const newDivForChoices = document.createElement("div");
         let optionsArr = buttonText.split(" ")
@@ -397,6 +407,10 @@ function checkAuthState() {
 
     }
 
+    /* 
+    used when reloading a saved chat in order to 
+    make it the same as before as.
+    */
     function addSpotifyInfo(song,link,area){
         const recommendation = document.createElement("span");
         const linkTag = document.createElement("a") 
@@ -415,20 +429,23 @@ function checkAuthState() {
         // adjustHeightDifference(um,ou) 
     }
 
+    /* 
+    same as in script.js, as the outputs can be different
+    heights due to different amounts of text the heights
+    of the user input message needs to be the same height
+    as the bot response message, otherwise the differences
+    will compound
+    */
     function adjustHeightDifference(userMessage,outputArea) {
         const chatResponseHeight = outputArea.getClientRects()[0].height;
         const userInputHeight = userMessage.getClientRects()[0].height;
         if(chatResponseHeight !== userInputHeight){
             const difference = chatResponseHeight - userInputHeight
             const lastUserListItem = userMessage.lastChild;
-
-            
             const lastBotListItem = outputArea.lastChild;
             console.log(lastBotListItem)
-
             const lastUserListItemHeight = lastUserListItem.clientHeight;   
             const lastBotListItemHeight = lastBotListItem.clientHeight;
-
             console.log(lastBotListItemHeight)  
             lastUserListItem.style.height = (lastBotListItemHeight) + "px"
             lastUserListItem.style.padding = 0
@@ -451,9 +468,11 @@ function checkAuthState() {
         }
     }
 
-    // saving a chat 
-    // saves the chat in a structured way based on which 
-    // part it is in
+    /*
+    saving a chat 
+    saves the chat in a structured way based on which 
+    part it is in
+    */
     function save(){
         const saveButton = document.querySelector("#saveButton")
         if(saveButton){
@@ -470,9 +489,11 @@ function checkAuthState() {
             const userMessagesRef = ref(database, 'users/' + auth.currentUser.uid + '/messages');
             const userFeelings = document.querySelectorAll('#userMessage ul li');
             const botResponses = document.querySelectorAll('#outputArea ul li');
-            // console.log(botResponses)
-            // console.log("!!!!!!!!!!!!!!!!!")
-            // adding each user message to user dict
+            /*
+            console.log(botResponses)
+            console.log("!!!!!!!!!!!!!!!!!")
+            adding each user message to user dict
+            */
             userFeelings.forEach((userFeeling,index) => {
                 const arr = [userFeeling.textContent.trim()]
                 // adding 1 to align user dict with botdict
@@ -486,6 +507,7 @@ function checkAuthState() {
                 if(index !== 0){
                     console.log(botResponse.innerText)
                     const string = botResponse.textContent
+                    // 
                     if(string.includes("<") || string.includes(">")){
                         alert("Don't be sneaky")
                     }else{
@@ -530,6 +552,7 @@ function checkAuthState() {
                     botDict[(index)] = arr
                 }
                 console.log(userDict)
+                console.log("hi ")
                 console.log(botDict)
               }
             });
@@ -543,7 +566,6 @@ function checkAuthState() {
         })
     }
 }
-
 
     function toggleLoginView() {
         loginP.addEventListener("click", () =>{
@@ -616,6 +638,7 @@ function checkAuthState() {
     }
 
 
+    //creating an account with the help of firebase
     function createAccount(){
         submitNewAccount.addEventListener('click', function(event) {
             event.preventDefault(); 
@@ -623,6 +646,7 @@ function checkAuthState() {
             console.log(email)
             const password = document.getElementsByName('password')[0].value;
             const confirmPassword = document.getElementsByName('confirmPassword')[0].value;
+            // interaction with flask app
             fetch('/createAccount', {
                 method: 'POST',
                 headers: {
@@ -639,6 +663,7 @@ function checkAuthState() {
             })
             .then(data => {
                 if(data.answer === "Success"){
+                    // firebase method
                     createUserWithEmailAndPassword(auth, email, password).then(cred => {
                         console.log(cred);
                          const responseElement = document.querySelector('.response p');
@@ -660,7 +685,6 @@ function checkAuthState() {
                          responseElement.textContent = error.message
                       
                     });
-                // });
                 }else{
                     const responseElement = document.querySelector('.response p');
                     responseElement.textContent = data.answer;

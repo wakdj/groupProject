@@ -14,23 +14,17 @@ const createAccountButton = Selector('#createAccount')
 const responseFromLoginSection = Selector("div .response p")
 const pastChatsP = Selector('#pastChats')
 const pastChatsUl = Selector('.past-chat ul')
+const loginButton = Selector('#submitLogin')
 
 const alph = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-fixture('Getting Started')
+fixture('UI Tests')
     .page('https://moodymusic.pythonanywhere.com/');
 
-    function getInputsAndResponses(emotion){
-        let potentialInputs = []
+    function getResponses(emotion){
         let potentialResponses = []
         switch (emotion){
             case "greeting":
-                potentialInputs = ["Hi",
-                "Hey",
-                "How are you",
-                "Is anyone there?",
-                "Hello",
-                "Good day"]
                 potentialResponses = [
                     "Hey :-)",
                     "Hello, thanks for visiting",
@@ -39,11 +33,43 @@ fixture('Getting Started')
                   ]
                 break;
             case "goodbye":
-                potentialInputs = ["Bye", "See you later", "Goodbye"];
                 potentialResponses = ["See you later, thanks for visiting",
                 "Have a nice day"]
+                break;
+            case "thanks":
+                potentialResponses = ["Happy to help!", "Any time!", "My pleasure"]
+                break;
+            case "happy":
+                potentialResponses = [
+                    "That's super. Pick an option from below and I'll find you a song",
+                    "I've got a few songs in mind. Please pick one of the options, and I'll do all the work."
+                  ]
+                  break;
+                case "sad":
+                    potentialResponses = [
+                        "Oh diddums, here's a few options for you to pick from.",
+                        "If you're not feeling so great, please pick one of the options below and I'll recommend a song for you."
+                      ]
+                      break;
+                case "relaxed":
+                    potentialResponses = [
+                        "Nice! I've got a few chill options below for you."
+                      ]
+                    break;
+                case "energetic":
+                    potentialResponses = [
+                        "I've got a few options that you'll like",
+                        "PICK ONE OF THE OPTIONS BELOW!"
+                      ]
+                    break;
+                case "funnny":
+                    potentialResponses = [
+                        "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
+                        "What did the buffalo say when his son left for college? Bison."
+                      ]
+
         }
-        return [potentialInputs, potentialResponses]
+        return potentialResponses
     }
 
 test('Asserting value submitted to chatbot is displayed in the correct area', async t => {
@@ -59,11 +85,95 @@ test('Asserting value submitted to chatbot is displayed in the correct area', as
 });
 
 
-test('Asserting greeting response', async t => {
-    const potentialInputs = getInputsAndResponses("greeting")[0]
-    const potentialResponses = getInputsAndResponses("greeting")[1]
-    const r = Math.floor(Math.random() * potentialInputs.length)
-    const wordToType = potentialInputs[r]
+test('Asserting response (greeting)', async t => {
+    const potentialResponses = getResponses("greeting")
+    const wordToType = "hi"
+    await t
+        .maximizeWindow()
+        .typeText(textInput,wordToType)
+        .click(enterButton)
+        const chatbotResponse = await chatBotResponseSpan.innerText;
+        if (
+            potentialResponses.includes(chatbotResponse)
+        ) {
+            await t.expect(true).ok();
+        } else {
+            await t.expect(false).ok();
+        }
+}); 
+
+test('Asserting response (goodbye)', async t => {
+    const potentialResponses = getResponses("goodbye")
+    const wordToType = "bye"
+    await t
+        .maximizeWindow()
+        .typeText(textInput,wordToType)
+        .click(enterButton)
+        const chatbotResponse = await chatBotResponseSpan.innerText;
+        if (
+            potentialResponses.includes(chatbotResponse)
+        ) {
+            await t.expect(true).ok();
+        } else {
+            await t.expect(false).ok();
+        }
+}); 
+
+test('Asserting response (sad)', async t => {
+    const potentialResponses = getResponses("sad")
+    const wordToType = "gimme a sad song"
+    await t
+        .maximizeWindow()
+        .typeText(textInput,wordToType)
+        .click(enterButton)
+        const chatbotResponse = await chatBotResponseSpan.innerText;
+        if (
+            potentialResponses.includes(chatbotResponse)
+        ) {
+            await t.expect(true).ok();
+        } else {
+            await t.expect(false).ok();
+        }
+}); 
+
+test('Asserting response (happy)', async t => {
+    const potentialResponses = getResponses("happy")
+    const wordToType = "i feel great"
+    await t
+        .maximizeWindow()
+        .typeText(textInput,wordToType)
+        .click(enterButton)
+        const chatbotResponse = await chatBotResponseSpan.innerText;
+        if (
+            potentialResponses.includes(chatbotResponse)
+        ) {
+            await t.expect(true).ok();
+        } else {
+            await t.expect(false).ok();
+        }
+}); 
+
+
+test('Asserting response (relaxed)', async t => {
+    const potentialResponses = getResponses("relaxed")
+    const wordToType = "i am chill"
+    await t
+        .maximizeWindow()
+        .typeText(textInput,wordToType)
+        .click(enterButton)
+        const chatbotResponse = await chatBotResponseSpan.innerText;
+        if (
+            potentialResponses.includes(chatbotResponse)
+        ) {
+            await t.expect(true).ok();
+        } else {
+            await t.expect(false).ok();
+        }
+}); 
+
+test('Asserting response (energetic)', async t => {
+    const potentialResponses = getResponses("energetic")
+    const wordToType = "i am pumped up"
     await t
         .maximizeWindow()
         .typeText(textInput,wordToType)
@@ -92,57 +202,6 @@ test('Asserting fallback response', async t => {
         .expect(chatBotResponseSpan.innerText).eql(fallbackResponse)
 }); 
  
-
-
-test('Asserting function works', async t=>{
-    let potentialInputs = getInputsAndResponses("greeting")[0]
-    let potentialResponses = getInputsAndResponses("greeting")[1]
-    const r = Math.floor(Math.random() * potentialInputs.length)
-    const wordToType = potentialInputs[r]
-    await t
-        .maximizeWindow()
-        .typeText(textInput,wordToType)
-        .click(enterButton)
-        const chatbotResponse = await chatBotResponseSpan.innerText;
-        if (
-            potentialResponses.includes(chatbotResponse)
-        ) {
-            await t.expect(true).ok();
-        } else {
-            await t.expect(false).ok();
-        }
-
-})
-test('Asserting emotion (sad) response', async t => {
-    let potentialInputs = [ "sad",
-    "unhappy",
-    "shit",
-    "heartbroken",
-    "I'm feeling sad",
-    "I'm feeling down",
-    "I'm feeling blue",
-    "I am very melancholy",
-    "I am feeling sad",
-    "I am feeling down",
-    "I am feeling blue"]
-    const potentialResponses = [ "Oh diddums, here's a few options for you to pick from.",
-    "If you're not feeling so great, please pick one of the options below and I'll recommend a song for you."]
-    const r = Math.floor(Math.random() * potentialInputs.length)
-    const wordToType = potentialInputs[r]
-    await t
-        .maximizeWindow()
-        .typeText(textInput,wordToType)
-        .click(enterButton)
-        const chatbotResponse = await chatBotResponseSpan.innerText;
-        if (
-            potentialResponses.includes(chatbotResponse)
-        ) {
-            await t.expect(true).ok();
-        } else {
-            await t.expect(false).ok();
-        }
-}); 
-
 
 test('Assert invalid email response',async t => {
     // https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
@@ -206,4 +265,20 @@ test('Assert past chats response when not logged int',async t => {
         .expect(pastChatsUl.child(0).innerText).eql("You are not logged in")
 })
 
+test('Invalid credentails', async t=>{
+    const N = 10
+    const randomCharsForEmail = Array(N).join().split(',').map(function() { return alph.charAt(Math.floor(Math.random() * alph.length)); }).join('');
+    const randomCharsForPasswords = Array(N).join().split(',').map(function() { return alph.charAt(Math.floor(Math.random() * alph.length)); }).join('');
+    await t
+        .maximizeWindow()
+        .click(loginToggle)
+        .typeText(emailField, randomCharsForEmail + "@gmail.com")
+        .typeText(firstPasswordField,randomCharsForEmail)
+        .click(loginButton)
+        .expect(responseFromLoginSection.innerText).eql("Firebase: Error (auth/invalid-credential).")
 
+})
+
+test("Create account",async =>{
+    
+})
