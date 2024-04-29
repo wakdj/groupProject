@@ -49,9 +49,9 @@ li div{
   .choice:hover{
     background-color: skyblue;
   }
-    button:hover:not([enabled="enabled"]) {
+    /* button:hover:not([enabled="enabled"]) {
     background-color: #e6d7ff;
-    }
+    } */
 
 
 
@@ -133,9 +133,9 @@ input{
     padding: 0.5em;
 }
 
-.btn:hover{
+/* .btn:hover{
     background-color: #023020 !important;
-}
+} */
 
 
 .input-container {
@@ -209,14 +209,22 @@ span{
     border-radius: 0.3em;
 }
 
-#predictButton:hover {
+/* #predictButton:hover {
     background-color: #023020;
-}
+} */
 .side-bar-toggle{
     display: none;
 }
 #toggleSideBar{
     display: none;
+}
+
+#deleteAccount{
+    background-color: #FF6961;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    border-radius: 0.75em;
 }
 
 .past-chat ul {

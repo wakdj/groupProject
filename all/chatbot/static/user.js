@@ -2,11 +2,12 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
-  import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js'
+  import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged,deleteUser } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js'
   import { getDatabase, ref, set,get,child,remove } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js'
 
 /*
-REFACTORING NEEDED DUE TO THE AMOUNT OF REPETITION
+This script handles most of the functionality for the user accounts e.g. 
+login, logout, loading chats, deleting chats, saving chats etc.
 */
   const firebaseConfig = {
     apiKey: "AIzaSyBnOmxGqAgf0IUtjX0USeikuHNlWNHNYIo",
@@ -26,10 +27,10 @@ REFACTORING NEEDED DUE TO THE AMOUNT OF REPETITION
 
 document.addEventListener('DOMContentLoaded', function () {
     
-    console.log(app)
-    console.log(analytics)
-    console.log(auth)
-    console.log(database)
+    // console.log(app)
+    // console.log(analytics)
+    // console.log(auth)
+    // console.log(database)
     const loginP = document.querySelector("#loginToggle")
     const logoutP = document.querySelector("#logout")
     const loginForm = document.querySelector("#loginForm")
@@ -43,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
     checkAuthState()
     
-    
+
+// renders elements based on whether the user is logged in or not
 function checkAuthState() {
     const user = auth.currentUser;
     if (user) {
@@ -53,6 +55,7 @@ function checkAuthState() {
         addSaveButton()
         displayPastChatNames()
         newChat()
+        toggleDeleteAccountView()
         logoutP.addEventListener("click",() =>{
             signOut(auth).then(() => {
                 logoutP.classList.add("hidden")
@@ -63,12 +66,12 @@ function checkAuthState() {
               });
         })
     } else {
-        
         removeSaveButton()
         removePastChats()
         clearHTML()
         removeloginResponse()
         clearPastChats()
+        toggleDeleteAccountView()
         console.log("No user is signed in.");
     }
 }
@@ -78,6 +81,7 @@ function checkAuthState() {
     });
     checkAuthState();
 
+    // clears the chat area, giving the illusion of a new chat
     function newChat(){
        const emptyChat = document.querySelector(".empty")
         emptyChat.addEventListener("click", () =>{
@@ -85,6 +89,14 @@ function checkAuthState() {
         }) 
     }
 
+    // delete account button will only be visible if user is logged in 
+    function toggleDeleteAccountView(){
+        const deleteAccountDiv = document.querySelector(".delete-account")
+        deleteAccountDiv.classList.toggle("hidden")
+    }
+
+
+    // clearing the html rendered in the past chat area so
     function clearPastChats(){
        const childNodes = Array.from(unorderedList.childNodes);
         childNodes.forEach(e => {
@@ -101,11 +113,9 @@ function checkAuthState() {
         const li = document.createElement("li")
         li.textContent = "You are not logged in"
         unorderedList.appendChild(li)
-        // pastChatP.addEventListener("click", () =>{
-        //     //unorderedList.classList.toggle("hidden")
-        //     //console.log("toggled")
-        // })
     }
+
+    // save button in order to save chats when logged in
     function addSaveButton(){
         const inputArea = document.querySelector(".input-container")
         const newButton = document.createElement("button")
@@ -115,12 +125,15 @@ function checkAuthState() {
         inputArea.appendChild(newButton)
         save()
     }
+
     function removeloginResponse(){
         const responseArea = document.querySelector(".response p")
         responseArea.textContent = ""
     }
 
     function displayPastChatNames() {
+        // removing any nodes already there. i think this is not required
+        // but i don't want to remove it
         const childNodes = Array.from(unorderedList.childNodes);
         childNodes.forEach(e => {
             if (e.nodeName === "LI") {
@@ -129,18 +142,19 @@ function checkAuthState() {
                 console.log("removed");
             }
         });
+        // creating ul for future population
         const pastChatP = document.querySelector("#pastChats");
         const pastChatDiv = document.querySelector(".past-chat");
         unorderedList.classList.add("pastChatUl")
         const emptyChat = document.createElement("li")
-        
-        //emptyChat.classList.add("previous-chat")
         emptyChat.classList.add("empty")
         emptyChat.textContent = "New Chat"
         unorderedList.appendChild(emptyChat)
+        // getting instance of database
         const dbRef = ref(database);
         const userId = auth.currentUser.uid;
         let chatNames = new Set()
+        // accessing/ getting data from db 
         get(child(dbRef, `users/${userId}`))
             .then((snapshot) => {
                 if (snapshot.exists()) {
@@ -159,10 +173,10 @@ function checkAuthState() {
                     return chatNameArr
                 } else {
                     throw new Error("Fail");
-                    
                 }
             })
             .then((chatNameArr) => {
+                // creating lis with name of past chats
                 const chatNameElements = chatNameArr.map(chatName => {
                     const newli = document.createElement("li");
                     newli.classList.add("previous-chat");
@@ -175,6 +189,7 @@ function checkAuthState() {
                 });
                 return chatNameElements;
             })
+            // appending lis to ul
             .then((chatNameElements) => {
                 chatNameElements.forEach(element => {
                     unorderedList.appendChild(element);
@@ -186,10 +201,9 @@ function checkAuthState() {
             });
     }
 
+    // hiding/ showing past chats when clicking on past chats p 
     function toggleP() {
         const pastChatP = document.querySelector("#pastChats");
-       
-    
         pastChatP.addEventListener("click", () => {
             unorderedList.classList.toggle("hidden");
             console.log("toggled");
@@ -231,6 +245,23 @@ function checkAuthState() {
                 }
             });
     }
+
+    function deleteUserAccount(){
+        const deleteButton = document.querySelector("#deleteAccount")
+        deleteButton.addEventListener('click', ()=>{
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            deleteUser(user).then(() => {
+            alert("Account Deleted")
+            }).catch((error) => {
+            console.error(error)
+            alert("Account Deletion Unsuccessful")
+            });
+
+        })
+    }
+
 
     function displayPastMessages(elem){
         const dbRef = ref(database);
@@ -280,6 +311,7 @@ function checkAuthState() {
         });
     }
 
+    // populating chat area with past chat of user's choice
     function populate(chats){
         const outputArea = document.querySelector('#outputArea > ul');
         const userMessage = document.querySelector("#userMessage > ul");
@@ -328,6 +360,7 @@ function checkAuthState() {
 
     }
 
+    // adding option buttons to one old response
     function addButtons(buttonText,area){
         const newDivForChoices = document.createElement("div");
         let optionsArr = buttonText.split(" ")
@@ -417,30 +450,44 @@ function checkAuthState() {
         saveButton.remove()
         }
     }
+
+    // saving a chat 
+    // saves the chat in a structured way based on which 
+    // part it is in
     function save(){
         const saveButton = document.querySelector("#saveButton")
         if(saveButton){
-        
         saveButton.addEventListener("click",()=>{
             console.log("clicked")
            let chatName =  prompt("Name your chat").trim()
+           // if no name given by user the chat name is the time
            if(chatName === ""){
             chatName = "Chat saved at: " + new Date().toLocaleTimeString()
            }
+           // separate dicts for user input and bot response 
             const userDict = {}
             const botDict = {}
             const userMessagesRef = ref(database, 'users/' + auth.currentUser.uid + '/messages');
             const userFeelings = document.querySelectorAll('#userMessage ul li');
             const botResponses = document.querySelectorAll('#outputArea ul li');
-            console.log(botResponses)
-            console.log("!!!!!!!!!!!!!!!!!")
+            // console.log(botResponses)
+            // console.log("!!!!!!!!!!!!!!!!!")
+            // adding each user message to user dict
             userFeelings.forEach((userFeeling,index) => {
                 const arr = [userFeeling.textContent.trim()]
+                // adding 1 to align user dict with botdict
+                // as botdict starts with an empty li
                 userDict[(index+1)] = arr
             });
+
+            // breaking down the bot responses into distinct sections 
+            // and grabbing the text from each relevant part
             botResponses.forEach((botResponse, index) => {
                 if(index !== 0){
                     const arr = botResponse.outerHTML.split("<div>")
+                    // each of the following if statements breaks down
+                    // the html into "clean" text that can be saved
+                    // to the db in a suitable format for reloading
                     if(arr[1]){
                        const split = arr[1].split("<span>")
                         const split2 = split[1].split("</span>")
@@ -480,7 +527,7 @@ function checkAuthState() {
                 console.log(userDict)
                 console.log(botDict)
             });
-
+            // adding relevant text data to db
             set(ref(database, 'users/' + auth.currentUser.uid + "/" + chatName), {
                 chatName: chatName,
                 userDict: userDict,
@@ -490,7 +537,7 @@ function checkAuthState() {
     }
 }
 
-   
+
     function toggleLoginView() {
         loginP.addEventListener("click", () =>{
             loginForm.classList.toggle("hidden")
@@ -507,6 +554,8 @@ function checkAuthState() {
             
         })
     }
+
+
     function login(){
         submitLogin.addEventListener('click', function(event) {
             event.preventDefault(); 
@@ -558,10 +607,9 @@ function checkAuthState() {
         
                 
     }
+
+
     function createAccount(){
-        // if(confirmPasswordFieldInput.classList.value === "hidden"){
-        //     return
-        // }
         submitNewAccount.addEventListener('click', function(event) {
             event.preventDefault(); 
             const email = document.getElementsByName('email')[0].value;
@@ -583,8 +631,6 @@ function checkAuthState() {
                 return response.json();
             })
             .then(data => {
-                // const responseElement = document.querySelector('.response p');
-                // responseElement.textContent = data.answer;
                 if(data.answer === "Success"){
                     createUserWithEmailAndPassword(auth, email, password).then(cred => {
                         console.log(cred);
@@ -625,5 +671,6 @@ function checkAuthState() {
     login();
     createAccount();
     deleteChatFromDB()
+    deleteUserAccount()
 });
 
