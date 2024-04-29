@@ -479,11 +479,16 @@ function checkAuthState() {
                 // as botdict starts with an empty li
                 userDict[(index+1)] = arr
             });
-
+            
             // breaking down the bot responses into distinct sections 
             // and grabbing the text from each relevant part
             botResponses.forEach((botResponse, index) => {
                 if(index !== 0){
+                    console.log(botResponse.innerText)
+                    const string = botResponse.textContent
+                    if(string.includes("<") || string.includes(">")){
+                        alert("Don't be sneaky")
+                    }else{
                     const arr = botResponse.outerHTML.split("<div>")
                     // each of the following if statements breaks down
                     // the html into "clean" text that can be saved
@@ -516,7 +521,7 @@ function checkAuthState() {
                     if(arr[3]){
                         let string = arr[3]
                         string = string.replace("<span>","")
-                        const split = string.split(". ")
+                        const split = string.split(`. Here's`)
                         const link = string.split(`"`)[1]
                         arr[3] = split[0]
                         arr.push(link)
@@ -526,7 +531,9 @@ function checkAuthState() {
                 }
                 console.log(userDict)
                 console.log(botDict)
+              }
             });
+
             // adding relevant text data to db
             set(ref(database, 'users/' + auth.currentUser.uid + "/" + chatName), {
                 chatName: chatName,
