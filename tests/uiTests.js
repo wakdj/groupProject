@@ -1,5 +1,4 @@
-// testcafe chrome tests/uiTests.js
-
+// testcafe chrome tests/uiTests.jss'
 import { Selector } from 'testcafe';
 const textInput = Selector('#textInput');
 const enterButton = Selector('#predictButton')
@@ -17,11 +16,21 @@ const pastChatsUl = Selector('.past-chat ul')
 const loginButton = Selector('#submitLogin')
 const deleteAccountButton = Selector('#deleteAccount')
 const saveButton = Selector('#saveButton')
+const logoutButton = Selector('#logout')
+const chillChat = Selector('#sideBarContainer li').withText('chillX')
+//const login = Selector('#saveButton')
 //const newChatLI = Selector('#sideBarContainer li').withText('New Chat')
+const saveChat = Selector('#sideBarContainer li').withText('save chat testX')
 
 const alph = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 const url = 'https://moodymusic.pythonanywhere.com/'
+
+// async refresh () {
+//     await ClientFunction(() => {
+//       document.location.reload();
+//     })();
+//   }
 fixture('UI Tests')
     .page(url);
 
@@ -283,7 +292,7 @@ test('Invalid credentails', async t=>{
 
 })
 
-test.only("Create Account post state + deletion",async t =>{
+test("Create Account post state validation",async t =>{
     // deletion combined into this test as i dont want 
     // loads of accounts being created.
     const N = 6
@@ -292,10 +301,10 @@ test.only("Create Account post state + deletion",async t =>{
         .maximizeWindow()
         .click(loginToggle)
         .click(newAccountBtn)
-        .typeText(emailField, randomCharsForEmail + "@gmail.com")
-        .debug()
-        .typeText(firstPasswordField,"test_test")
-        .typeText(confirmPasswordField,"test_test")
+        .typeText(emailField, "testtest" + "@gmail.com")
+        //.debug()
+        .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+        .typeText(confirmPasswordField,"wjefnwjkefnwjfew")
         .click(createAccountButton)
         .expect(loginToggle.filterVisible().exists).notOk()
         .expect(deleteAccountButton.filterVisible().exists).ok()
@@ -303,6 +312,74 @@ test.only("Create Account post state + deletion",async t =>{
         .click(pastChatsP)
         .expect(pastChatsUl.child(0).innerText).eql("New Chat")
         .setNativeDialogHandler(() => true) 
-        .click(deleteAccountButton)
-        .expect(saveButton.filterVisible().exists).notOk()
+        // .click(deleteAccountButton)
+        // .expect(saveButton.filterVisible().exists).notOk()
 })      
+
+test('Test Login and Logout', async t => {
+    await t
+    .maximizeWindow()
+    .click(loginToggle)
+    .typeText(emailField, "testtest" + "@gmail.com")
+    .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+    .click(loginButton)
+    .expect(loginToggle.filterVisible().exists).notOk()
+    .expect(deleteAccountButton.filterVisible().exists).ok()
+    .expect(saveButton.filterVisible().exists).ok()
+    .click(logoutButton)
+    .expect(loginToggle.filterVisible().exists).ok()
+    .expect(deleteAccountButton.filterVisible().exists).notOk()
+    .expect(saveButton.filterVisible().exists).notOk()
+})
+
+
+
+test('Test saving chat', async t =>{
+    // https://testcafe.io/documentation/402684/reference/test-api/testcontroller/setnativedialoghandler
+    const wordToType = "hi"
+    const chatName = "save chat test"
+    await t
+        .maximizeWindow()
+        .click(loginToggle)
+        .typeText(emailField, "testtest" + "@gmail.com")
+        .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+        .click(loginButton)
+        // .expect(loginToggle.filterVisible().exists).notOk()
+        // .expect(deleteAccountButton.filterVisible().exists).ok()
+        // .expect(saveButton.filterVisible().exists).ok()
+        .wait(500)
+        .typeText(textInput,wordToType)
+        .click(enterButton)
+        .setNativeDialogHandler((type, text) => {
+            switch (type) {
+            case 'prompt':
+                return "save chat test";
+            default:
+                throw 'An alert was invoked!';
+            }})
+
+        .click(saveButton)
+    // await t
+    //     .click(pastChatsP)
+    //     .click(chillChat)
+    //     //.expect()
+    //     .expect(chatBotResponseSpan.child(0).innerText).eql("Nice! I've got a few chill options below for you.")
+})
+
+// the test above needs to run before. 
+test("reloading a chat", async t =>{
+    await t
+        .maximizeWindow()
+        .click(loginToggle)
+        .typeText(emailField, "testtest" + "@gmail.com")
+        .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+        .click(loginButton)
+        //.debug()
+        .click(pastChatsP)
+        .click(pastChatsUl.child(1))
+        .debug()
+        //.expect()
+        // .debug()
+        // .wait(500)
+
+} )
