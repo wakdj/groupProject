@@ -145,8 +145,8 @@ input{
 }
 
 .message-area{
-    min-height: 20em;
-    max-height: 20em;
+    min-height: 65vh;
+    max-height: 65vh;
     align-items: center;
     border-radius: 2em;
     width: 50em;

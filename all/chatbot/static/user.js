@@ -257,9 +257,19 @@ function checkAuthState() {
         deleteButton.addEventListener('click', ()=>{
             const auth = getAuth();
             const user = auth.currentUser;
-
+            const userID = auth.currentUser.uid
+            const chatRefToRemove = ref(database, `users/${userID}`);
+            console
+            remove(chatRefToRemove)
+            // .then(() => {
+            //     alert(`Chat "${chatName}" will be deleted from our database shortly.`)
+            // })
+            // .catch((error) => {
+            //     console.error("fail");
+            // });
             deleteUser(user).then(() => {
             alert("Account Deleted")
+            
             }).catch((error) => {
             console.error(error)
             alert("Account Deletion Unsuccessful")

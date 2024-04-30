@@ -15,11 +15,15 @@ const responseFromLoginSection = Selector("div .response p")
 const pastChatsP = Selector('#pastChats')
 const pastChatsUl = Selector('.past-chat ul')
 const loginButton = Selector('#submitLogin')
+const deleteAccountButton = Selector('#deleteAccount')
+const saveButton = Selector('#saveButton')
+//const newChatLI = Selector('#sideBarContainer li').withText('New Chat')
 
 const alph = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+const url = 'https://moodymusic.pythonanywhere.com/'
 fixture('UI Tests')
-    .page('https://moodymusic.pythonanywhere.com/');
+    .page(url);
 
     function getResponses(emotion){
         let potentialResponses = []
@@ -279,6 +283,26 @@ test('Invalid credentails', async t=>{
 
 })
 
-test("Create account",async =>{
-    
-})
+test.only("Create Account post state + deletion",async t =>{
+    // deletion combined into this test as i dont want 
+    // loads of accounts being created.
+    const N = 6
+    const randomCharsForEmail = Array(N).join().split(',').map(function() { return alph.charAt(Math.floor(Math.random() * alph.length)); }).join('');
+    await t
+        .maximizeWindow()
+        .click(loginToggle)
+        .click(newAccountBtn)
+        .typeText(emailField, randomCharsForEmail + "@gmail.com")
+        .debug()
+        .typeText(firstPasswordField,"test_test")
+        .typeText(confirmPasswordField,"test_test")
+        .click(createAccountButton)
+        .expect(loginToggle.filterVisible().exists).notOk()
+        .expect(deleteAccountButton.filterVisible().exists).ok()
+        .expect(saveButton.filterVisible().exists).ok()
+        .click(pastChatsP)
+        .expect(pastChatsUl.child(0).innerText).eql("New Chat")
+        .setNativeDialogHandler(() => true) 
+        .click(deleteAccountButton)
+        .expect(saveButton.filterVisible().exists).notOk()
+})      
