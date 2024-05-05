@@ -30,20 +30,24 @@ chars_ignore = ['?','.',',','!']
 stop_words = set(stopwords.words('english'))
 
 for intent in intents['intents']:
+    # pattern is what we expect the user to type
     for pattern in intent['patterns']:
+        # tokenising in order for the nn to understand 
         word_list = nltk.word_tokenize(pattern)
+        # removing stop words
         word_list = [word for word in word_list if word.lower() not in stop_words]
         words.extend(word_list)
         docs.append(((word_list),intent['tag']))
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
-
+# trimming suffixes
 stemmer = LancasterStemmer()
-
 words = [stemmer.stem(word) for word in words if word not in chars_ignore ]
 
+# unique words
 words = sorted(set(words))
 
+#saving
 pickle.dump(words,open(file_path_words,'wb'))
 pickle.dump(classes,open(file_path_classes,'wb'))
 
