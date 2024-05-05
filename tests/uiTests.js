@@ -21,6 +21,8 @@ const chillChat = Selector('#sideBarContainer li').withText('chillX')
 //const login = Selector('#saveButton')
 //const newChatLI = Selector('#sideBarContainer li').withText('New Chat')
 const saveChat = Selector('#sideBarContainer li').withText('save chat testX')
+const deleteChatButton = Selector('#sideBarContainer button').withText("X")
+
 
 const alph = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -333,11 +335,10 @@ test('Test Login and Logout', async t => {
 })
 
 
-
+let savedChatResponse = ""
 test('Test saving chat', async t =>{
     // https://testcafe.io/documentation/402684/reference/test-api/testcontroller/setnativedialoghandler
     const wordToType = "hi"
-    const chatName = "save chat test"
     await t
         .maximizeWindow()
         .click(loginToggle)
@@ -357,8 +358,10 @@ test('Test saving chat', async t =>{
             default:
                 throw 'An alert was invoked!';
             }})
-
+            savedChatResponse = await chatBotResponseSpan.innerText;  
+    await t
         .click(saveButton)
+       
     // await t
     //     .click(pastChatsP)
     //     .click(chillChat)
@@ -368,18 +371,58 @@ test('Test saving chat', async t =>{
 
 // the test above needs to run before. 
 test("reloading a chat", async t =>{
+    //const potentialResponses = getResponses("hi")
     await t
         .maximizeWindow()
         .click(loginToggle)
         .typeText(emailField, "testtest" + "@gmail.com")
         .typeText(firstPasswordField,"wjefnwjkefnwjfew")
         .click(loginButton)
-        //.debug()
+        .wait(1000)
         .click(pastChatsP)
         .click(pastChatsUl.child(1))
-        .debug()
-        //.expect()
-        // .debug()
-        // .wait(500)
+        .expect(userMessageSpan.innerText).eql("hi")
+        .expect(chatBotResponseSpan.innerText).eql(savedChatResponse)
+    
+} )
 
+test("Deleting a chat", async t =>{
+    
+    await t
+        .maximizeWindow()
+        .click(loginToggle)
+        .typeText(emailField, "testtest" + "@gmail.com")
+        .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+        .click(loginButton)
+        .wait(1000)
+        .click(pastChatsP)
+        .click(pastChatsUl.child(1))
+        .setNativeDialogHandler(() => true) 
+        .click(deleteChatButton)
+    await t.eval(() => location.reload(true))
+    await t.expect(pastChatsUl.child(1).exists).notOk()
+         
+} )
+
+
+test("Deleting account", async t =>{
+    
+    await t
+        .maximizeWindow()
+        .click(loginToggle)
+        .typeText(emailField, "testtest" + "@gmail.com")
+        .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+        .click(loginButton)
+        .wait(1000)
+        .setNativeDialogHandler(() => true) 
+        .click(deleteAccountButton)
+    await t.eval(() => location.reload(true))
+    await t 
+    .click(loginToggle)
+    .typeText(emailField, "testtest" + "@gmail.com")
+    .typeText(firstPasswordField,"wjefnwjkefnwjfew")
+    .click(loginButton)
+    .expect(responseFromLoginSection.innerText).eql("Firebase: Error (auth/invalid-credential).")
+        
+         
 } )
