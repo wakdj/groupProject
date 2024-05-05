@@ -9,6 +9,8 @@
 This script handles most of the functionality for the user accounts e.g. 
 login, logout, loading chats, deleting chats, saving chats etc.
 */
+
+// config for firebase, this is auto-generated
   const firebaseConfig = {
     apiKey: "AIzaSyBnOmxGqAgf0IUtjX0USeikuHNlWNHNYIo",
     authDomain: "groupproject-c8efc.firebaseapp.com",
@@ -94,7 +96,7 @@ function checkAuthState() {
         const deleteAccountDiv = document.querySelector(".delete-account")
         deleteAccountDiv.classList.toggle("hidden")
     }
-
+    // called when user is not logged in
     function removeDeleteAccountButton(){
         const deleteBTn = document.querySelector(".delete-account")
         if(!deleteBTn.classList.contains("hidden")){
@@ -102,7 +104,7 @@ function checkAuthState() {
         }
     }
 
-    // clearing the html rendered in the past chat area so
+    // clearing the html rendered in the past chat area called when user is not logged in
     function clearPastChats(){
        const childNodes = Array.from(unorderedList.childNodes);
         childNodes.forEach(e => {
@@ -174,8 +176,9 @@ function checkAuthState() {
                     if(chatNames.length === 0){
                         chatNames.add("No chats available")
                     }
+                    // chat names from db
                     const chatNameArr = Array.from(chatNames)
-                    console.log(chatNameArr)
+                    //console.log(chatNameArr)
                     return chatNameArr
                 } else {
                     throw new Error("Fail");
@@ -594,7 +597,8 @@ function checkAuthState() {
         })
     }
 
-
+    // using flask to analyse inputs
+    // if inputs are suitable firebase will handle login
     function login(){
         submitLogin.addEventListener('click', function(event) {
             event.preventDefault(); 

@@ -1,5 +1,11 @@
-
+/*
+This script handles most of the functionality for chatbot interactions e.g.
+getting responses from flask app, displaying responses etc.
+*/
+    
+    
     document.addEventListener('DOMContentLoaded', function () {
+        // key elements
         const textInput = document.querySelector('#textInput');
         const predictButton = document.querySelector('#predictButton');
         const exploreContainer = document.querySelector(".explore-container")
@@ -10,7 +16,9 @@
         const toggleButton = document.querySelector('#toggleSideBar');
         toggleButton.addEventListener('click', toggleSideBar);
 
-
+        // Using the user input from the input area 
+        // and passing to the flask application's
+        // predict function
         function predictMessage() {
             const message = textInput.value.trim();
             console.log(message);
@@ -31,33 +39,52 @@
                     return response.json();
                 })
                 .then(data => {
+                    // splitting as the response is delivered in
+                    // a sub-optimal manner like so 
+                    // result + "~" + tag where the result is the 
+                    // response based on the tag (emotion)
+                    // e.g. "" 
                     const botText = data.answer.split("~")[0];
                     const intent = data.answer.split("~")[1]
-                
+                    
+                    // adding space for ux improvements
                     const spaceForBot = document.createElement("br")
                     const spaceForUser = document.createElement("br")
                     const spaceForChoices = document.createElement("br")
+                    
+                    // 
                     const newLiForBot = document.createElement("li");
                     const newLiForUser = document.createElement("li");
+
                     const newSpanForBot = document.createElement("span");
                     const newSpanForUser = document.createElement("span")
+                    
                     const newDivForBot = document.createElement("div");
                     const newDivForUser = document.createElement("div");
+                    
                     const responseText = document.createTextNode(botText);
                     newSpanForBot.appendChild(responseText)
                     spaceForChoices.classList.add("choices-container")
+                    
+                    // bot chat elements
                     newDivForBot.appendChild(newSpanForBot);
                     newDivForBot.appendChild(spaceForChoices);
                     newLiForBot.appendChild(newDivForBot);
                     newLiForBot.appendChild(spaceForBot);
+                    
+                    // user chat elements
                     const userText = document.createTextNode(message);
                     newSpanForUser.appendChild(userText)
                     newDivForUser.appendChild(newSpanForUser)
                     newLiForUser.appendChild(newDivForUser);
                     newLiForUser.appendChild(spaceForUser);
                     userMessage.appendChild(newLiForUser);
+                    
                     outputArea.appendChild(newLiForBot);
+                    
+                    // calling the function to display genre choice buttons
                     displayOptions(userMessage, intent,newDivForBot,outputArea);
+                    // Calling adjustHeightDifferent to make sure there is no offset
                     adjustHeightDifference(userMessage,outputArea);
                 })
                 .catch(error => {
@@ -72,38 +99,49 @@
 
     /*
     makes the heights of the chat response and user message
-    the same  heigh
+    the same  height
     */
     function adjustHeightDifference(userMessage,outputArea) {
+        // Getting the current height
         const chatResponseHeight = outputArea.getClientRects()[0].height;
         const userInputHeight = userMessage.getClientRects()[0].height;
+        
         if(chatResponseHeight !== userInputHeight){
             const difference = chatResponseHeight - userInputHeight
+            // getting the most recent additions
             const lastUserListItem = userMessage.lastChild;
-
-            
             const lastBotListItem = outputArea.lastChild;
-            console.log(lastBotListItem)
+            //console.log(lastBotListItem)
 
             const lastUserListItemHeight = lastUserListItem.clientHeight;   
             const lastBotListItemHeight = lastBotListItem.clientHeight;
 
-            console.log(lastBotListItemHeight)  
+            //console.log(lastBotListItemHeight) 
+            // setting the user chat area to the same heigh as the last
+            // "chatbot" response area 
             lastUserListItem.style.height = (lastBotListItemHeight) + "px"
             lastUserListItem.style.padding = 0
         }
 
     }
 
+    // displaying choice buttons for the genre of song
     function displayOptions(um,category, area,ou) {
+        // area for buttons
         const newDivForChoices = document.createElement("div");
+        // area for song
         const newDivForAnswers = document.createElement('div');
         const optionsArr = [];
         const recommendation = document.createElement("span");
-        console.log(category);
+        //console.log(category);
+        
+        // categories that shouldn't have a button
         if (category === "greeting" || category === "thanks" || category === "goodbye" || category === "funny" || category === "unknown") {
             return;
         }
+
+        // options defined for each category
+        // could be switch-case
         if (category === "sad") {
             optionsArr[0] = "pop";
             optionsArr[1] = "blues";
@@ -121,6 +159,7 @@
             optionsArr[1] = "guaracha";
             optionsArr[2] = "drum and bass";
         }
+        // creating elems and adding to dom
         const choice1 = document.createElement("button");
         const choice2 = document.createElement("button");
         const choice3 = document.createElement("button");
@@ -137,8 +176,14 @@
         newDivForChoices.appendChild(choice2);
         newDivForChoices.appendChild(choice3);
         area.appendChild(newDivForChoices);
-    
+        
+        // selecting all buttons
         let choicesArr = document.querySelectorAll(".choice");
+        // when one is clicked the postSong
+        // flask function receives the category (emotion)
+        // and the genre
+        // this then returns the data from a random spotify song 
+        // of that genre 
         choicesArr.forEach(function (elem) {
             elem.addEventListener("click", function () {
                 const message = category + "_" + elem.textContent;
@@ -161,7 +206,9 @@
                         .then(data => {
                             const linkTag = document.createElement("a") 
                             elem.style.color = "pink"
+                            // song title, artist
                             const recommendationText = document.createTextNode(data.answer[0])
+
                             const link = document.createTextNode("Spotify link");
                             linkTag.appendChild(link);
                             linkTag.href = data.answer[1]
@@ -183,7 +230,7 @@
 
     // only for mobile view
     function toggleSideBar(e){
-        console.log("called")
+        //console.log("called")
         e.preventDefault()
         const activites = document.querySelector('#sideBarContainer');
         const container = document.querySelector('.explore-container');
