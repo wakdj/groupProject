@@ -9,19 +9,24 @@ app = Flask(__name__)
 def index_get():
     return render_template("template.html")
 
+#handle logins
 @app.post('/login')
 def login():
+    # default success
     message = "Success"
+    #getting data passed
     email = request.get_json().get("email")
     firstPassword = request.get_json().get("password")
+    # checking if valid
     boolList = [validEmail(email),validPassword(firstPassword) ]
     for b in boolList:
         if(b != True):
+            # setting response to one of the fail responses
             message = b
     message = {"answer": message}
     return jsonify(message)
 
-
+# they all follow a similar format to the one above.
 
 @app.post('/createAccount')
 def createAccount():

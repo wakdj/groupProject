@@ -43,7 +43,7 @@ getting responses from flask app, displaying responses etc.
                     // a sub-optimal manner like so 
                     // result + "~" + tag where the result is the 
                     // response based on the tag (emotion)
-                    // e.g. "" 
+                    // e.g. "" should have used an array
                     const botText = data.answer.split("~")[0];
                     const intent = data.answer.split("~")[1]
                     

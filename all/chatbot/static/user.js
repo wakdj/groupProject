@@ -679,7 +679,7 @@ function checkAuthState() {
                 if(data.answer === "Success"){
                     // firebase method
                     createUserWithEmailAndPassword(auth, email, password).then(cred => {
-                        console.log(cred);
+                        //console.log(cred);
                          const responseElement = document.querySelector('.response p');
                          responseElement.textContent = data.answer;
                          const loginForm = document.querySelector("#loginForm")
@@ -687,7 +687,7 @@ function checkAuthState() {
                          console.log(auth.currentUser)
                          set(ref(database, 'users/' + auth.currentUser.uid), {
                             email: email,
-                            profile_picture : "me.jpg"
+                            profile_picture : "me.jpg" // this doesn't actually upload an image, just a test
                         });
                             //set(ref(database,'UsersAuthList/' + cred.user.uid))
                         //ref.child("Users" + cred.user.uid).set("chocolate")
