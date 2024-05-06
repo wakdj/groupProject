@@ -16,6 +16,18 @@ getting responses from flask app, displaying responses etc.
         const toggleButton = document.querySelector('#toggleSideBar');
         toggleButton.addEventListener('click', toggleSideBar);
 
+        document.querySelector('.how-to-text').addEventListener('click', toggleHowToText);
+
+
+        function toggleHowToText() {
+        var additionalText = document.getElementById("explanationHowToText");
+        if (additionalText.style.display === "none") {
+        additionalText.style.display = "block";
+        } else {
+        additionalText.style.display = "none";
+    }
+
+
         // Using the user input from the input area 
         // and passing to the flask application's
         // predict function
