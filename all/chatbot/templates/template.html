@@ -26,7 +26,7 @@
                 <button id="toggleSideBar"><img src="../static/images/menuimg.png" alt="Menu Logo"></button>
                 </div>
                 <div id="sideBarContainer">
-                <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p> <p class="hidden" id = "logout">Logout <img src="../static/images/login_icon.webp" alt="login icon" height="17.5" width="17.5"></p><div id="loginForm" class="hidden">
+                <div class="side-bar-activities login"><p id = "loginToggle">Login <img src="../static/images/login_icon.webp" alt="login icon" height="17" width="17"></p> <p class="hidden" id = "logout">Logout <img src="../static/images/login_icon.webp" alt="login icon" height="17" width="17"></p><div id="loginForm" class="hidden">
                     <form action="/login" method="post">
                         <input id = "emailField" type="email" placeholder="Email Address" name="email" value="{{
                             request.form.email }}">
@@ -42,18 +42,20 @@
                 </div>
                </div>
                
-                <div class="side-bar-activities past-chat"><p id="pastChats">Past Chats <img src="../static/images/past-chat.webp" alt="login icon" height="17.5" width="17.5"></p></div>
+                <div class="side-bar-activities past-chat"><p id="pastChats">Past Chats <img src="../static/images/past-chat.webp" alt="login icon" height="17" width="17"></p></div>
 
                 <!--This section of code is for the How To on the sidebar, re organised its div for ease of access. -->
                 <div class="side-bar-activities how-to">
                     <div class="how-to-text">
-                        <p>How To<img src="../static/images/how-to.webp" alt="login icon" height="17.5" width="17.5"></p>
+                        <p>How To<img src="../static/images/how-to.webp" alt="login icon" height="17" width="17"></p>
+                        <div id="explanationHowToText" style="display: none;">
+                            <p>In order to find a song based on your mood, enter your mood in the search box below, 
+                            you will be displayed a suggested song with a functioning spotify link.
+                            Alternatively if you would like to save your past songs, please log in or create an account above.</p>
+                        </div>
                 </div>
-                <div id="explanationHowToText" style="display: none;">
-                    <p>In order to find a song based on your mood, enter your mood in the search box below, 
-                    you will be displayed a suggested song with a functioning spotify link.
-                    Alternatively if you would like to save your past songs, please log in or create an account above.</p>
                 </div>
+               
   
                 <div class="side-bar-activities delete-account hidden"><button id="deleteAccount">Delete Account</button></div>
             </div>

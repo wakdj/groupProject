@@ -163,6 +163,10 @@ input{
     border-radius: 1em;
     padding: 1em;
 }
+#explanationHowToText{
+    max-height: 4.5em;
+    overflow-y: scroll;
+}
 #outputArea{
     /* align-self: flex-start; */
     margin-top: 1em;
@@ -318,8 +322,9 @@ span{
     }
     .message-area{
         width: 20em;
-        padding: 2.5em;
-        min-height: 25em;
+        padding: 0em 2.5em;
+        min-height: 45vh;
+        max-height: 45vh;
     }
     .chat-container{
         padding: 0 0.5em;

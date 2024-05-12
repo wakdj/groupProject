@@ -319,6 +319,15 @@ test("Create Account post state validation",async t =>{
 })      
 
 test('Test Login and Logout', async t => {
+    // done as firefox does not logout the users 
+    // when a new test starts whereas as chrome does
+    await t
+        .wait(1000)
+    if(await logoutButton.filterVisible().exists){
+        await t 
+            .click(logoutButton)
+            .wait(1000)
+    }
     await t
     .maximizeWindow()
     .click(loginToggle)
@@ -339,6 +348,13 @@ let savedChatResponse = ""
 test('Test saving chat', async t =>{
     // https://testcafe.io/documentation/402684/reference/test-api/testcontroller/setnativedialoghandler
     const wordToType = "hi"
+    await t
+    .wait(1000)
+    if(await logoutButton.filterVisible().exists){
+        await t 
+            .click(logoutButton)
+            .wait(1000)
+    }
     await t
         .maximizeWindow()
         .click(loginToggle)
@@ -371,6 +387,13 @@ test('Test saving chat', async t =>{
 
 // the test above needs to run before. 
 test("reloading a chat", async t =>{
+    await t
+    .wait(1000)
+    if(await logoutButton.filterVisible().exists){
+        await t 
+            .click(logoutButton)
+            .wait(1000)
+    }
     //const potentialResponses = getResponses("hi")
     await t
         .maximizeWindow()
@@ -387,7 +410,13 @@ test("reloading a chat", async t =>{
 } )
 
 test("Deleting a chat", async t =>{
-    
+    await t
+    .wait(1000)
+    if(await logoutButton.filterVisible().exists){
+        await t 
+            .click(logoutButton)
+            .wait(1000)
+    }
     await t
         .maximizeWindow()
         .click(loginToggle)
@@ -406,7 +435,13 @@ test("Deleting a chat", async t =>{
 
 
 test("Deleting account", async t =>{
-    
+    await t
+    .wait(1000)
+    if(await logoutButton.filterVisible().exists){
+        await t 
+            .click(logoutButton)
+            .wait(1000)
+    }
     await t
         .maximizeWindow()
         .click(loginToggle)

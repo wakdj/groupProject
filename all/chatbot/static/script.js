@@ -26,6 +26,7 @@ getting responses from flask app, displaying responses etc.
         } else {
         additionalText.style.display = "none";
     }
+}
 
 
         // Using the user input from the input area 
