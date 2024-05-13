@@ -710,7 +710,6 @@ function checkAuthState() {
         });
       
                 }
-    
     toggleLoginView();
     toggleP()
     login();

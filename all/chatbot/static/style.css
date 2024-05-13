@@ -241,7 +241,10 @@ span{
     margin: 0;
     background-color:#faf3ea ;
 }
-
+#warning{
+    font-size: x-small !important;
+    text-align: center;
+}
 .delete{
     background-color: #FF6961;
     border-radius: 0.5em;

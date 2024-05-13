@@ -33,7 +33,7 @@ const url = 'https://moodymusic.pythonanywhere.com/'
 //       document.location.reload();
 //     })();
 //   }
-fixture('UI Tests')
+fixture('UI Chat Tests')
     .page(url);
 
     function getResponses(emotion){
