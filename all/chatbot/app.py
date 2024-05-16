@@ -17,7 +17,7 @@ def login():
     #getting data passed
     email = request.get_json().get("email")
     firstPassword = request.get_json().get("password")
-    # checking if valid
+    # checking if valid 
     boolList = [validEmail(email),validPassword(firstPassword) ]
     for b in boolList:
         if(b != True):

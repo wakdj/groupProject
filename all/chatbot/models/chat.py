@@ -9,6 +9,10 @@ from nltk.stem import LancasterStemmer
 from tensorflow.lite.python.interpreter import Interpreter
 from nltk.corpus import stopwords
 
+## https://github.com/patrickloeber/pytorch-chatbot/tree/master
+#https://github.com/jerrytigerxu/Simple-Python-Chatbot/tree/master
+# https://github.com/patrickloeber/chatbot-deployment/tree/main
+
 # Loading intents
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, "intents.json")
