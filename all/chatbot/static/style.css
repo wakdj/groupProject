@@ -242,7 +242,7 @@ span{
     background-color:#faf3ea ;
 }
 #warning{
-    font-size: x-small !important;
+    font-size: small !important;
     text-align: center;
 }
 .delete{
@@ -260,6 +260,10 @@ span{
 @media only screen and (max-width: 600px) {
     body{
         font-size: small;
+    }
+    #warning{
+        font-size: x-small !important;
+        text-align: center;
     }
 
     #userMessage li{
