@@ -63,6 +63,7 @@ a{
    margin-left: 1em;
    width: 10em;
     padding-bottom: 2em;
+    cursor: pointer;
 }
 img{
     vertical-align: middle;
