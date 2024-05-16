@@ -1,4 +1,4 @@
-// testcafe chrome tests/uiTests.jss'
+// testcafe chrome tests/chatTests.js'
 import { Selector } from 'testcafe';
 const textInput = Selector('#textInput');
 const enterButton = Selector('#predictButton')
